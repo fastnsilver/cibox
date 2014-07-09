@@ -22,3 +22,4 @@ AutoPartition.app
 .rbenv-gemsets
 .project
 .ruby-version
+**/rhcp.sh
