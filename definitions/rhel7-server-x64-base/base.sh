@@ -12,16 +12,13 @@ subscription-manager register --username $rcp_user --password $rcp_password --au
 # Install minimal packages
 yum -y install bzip2 gcc make gcc-c++ kernel-devel-`uname -r` linux-headers-generic zlib-devel openssl-devel readline-devel sqlite-devel perl wget dkms nfs-utils
 
-# Install Development Tools and X Window System
-yum -y groupinstall 'Development Tools' 'X Window System'
+# Install X Window System
+yum -y groupinstall 'X Window System'
 
 # Get and install EPEL
 wget http://mirrors.mit.edu/epel/beta/7/x86_64/epel-release-7-0.2.noarch.rpm
 chown veewee:veewee $VEEWEE_HOME/epel-release-7-0.2.noarch.rpm
 yum -y install epel-release-7-0.2.noarch.rpm
-
-# Install docker
-yum -y install docker-io
 
 # Make other repositories available
 subscription-manager repos --enable rhel-7-server-optional-rpms 

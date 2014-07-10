@@ -27,6 +27,8 @@ Veewee::Definition.declare({
   :postinstall_files => [
     "rhcp.sh",
     "base.sh",
+    "git.sh",
+    "docker.sh",
     #"chef.sh",
     "vagrant.sh",
     "virtualbox.sh",
