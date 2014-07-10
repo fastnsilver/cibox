@@ -3,12 +3,14 @@ yum -y clean all
 # RJP  - Had to modify - remove puppet references
 # rm -rf /etc/yum.repos.d/{puppetlabs,epel}.repo
 rm -rf /etc/yum.repos.d/{epel}.repo
-rm -rf VBoxGuestAdditions_*.iso
+
 
 # Remove all shell scripts that were uploaded
 rm -f *.sh
+# Remove RedHat Customer Portal credentials
 rm -f *.properties
-
+# Remove EPEL RPM
+rm -f *.rpm
 
 # Remove traces of mac address from network configuration
 # RJP - had to change this from
