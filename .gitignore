@@ -1,13 +1,14 @@
-.DS_Store
+**/.DS_Store
 .bundle
-Gemfile.lock
-gems/*
+**/Gemfile.lock
+**/gems/*
 iso/*
 iso
 *.ova
 tmp/*
 Vagrantfile
 Vagrantfile.*
+.vagrant
 !lib/veewee/templates/Vagrantfile.erb
 !lib/veewee/provider/kvm/templates/Vagrantfile
 cookbooks/*
