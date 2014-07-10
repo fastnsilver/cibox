@@ -24,3 +24,5 @@ AutoPartition.app
 .project
 .ruby-version
 **/rhcp.sh
+*.vmdk
+*.ovf
