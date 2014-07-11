@@ -11,3 +11,9 @@ rpm --import http://pkg.jenkins-ci.org/redhat/jenkins-ci.org.key
 
 # Installs latest available Jenkins
 yum -y install jenkins
+
+# Start Jenkins automatically on OS startup
+chkconfig jenkins on
+
+# Start Jenkins
+service jenkins start

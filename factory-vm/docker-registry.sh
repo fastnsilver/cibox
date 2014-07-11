@@ -3,11 +3,9 @@
 # Become root
 sudo -i
 
-# The sleeper has awoken. Make docker start up on boot.
-chkconfig docker on
-
-# Service start
-service docker start
-
 # Initialize
-docker run -p 5000:5000 registry
+# We've specified two flags: -d and -P. 
+# the -d flag which tells Docker to run the container in the background. 
+# the -P flag is new and tells Docker to map any required network ports 
+# inside our container to our host.
+docker run -d -p 5000:5000 registry
