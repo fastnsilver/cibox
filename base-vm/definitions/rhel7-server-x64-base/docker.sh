@@ -1,8 +1,11 @@
 # Install docker
 yum -y install docker-io
 
-# The sleeper has awoken. Make docker start up on boot.
-chkconfig docker on
+# Make docker start up on boot
+systemctl enable docker.service
 
-# Service start
-service docker start
+# Start docker
+systemctl start docker.service
+
+# Status
+systemctl status docker.service
