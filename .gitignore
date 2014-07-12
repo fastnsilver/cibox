@@ -6,8 +6,6 @@ iso/*
 iso
 *.ova
 tmp/*
-Vagrantfile
-Vagrantfile.*
 .vagrant
 !lib/veewee/templates/Vagrantfile.erb
 !lib/veewee/provider/kvm/templates/Vagrantfile
