@@ -16,17 +16,17 @@ Open [VMWare Player](https://my.vmware.com/web/vmware/free#desktop_end_user_comp
 
 Open a Virtual Machine.
 
-![Open Virtual Machine](images/vmware-player-home.png "Open a Virtual Machine")
+![Open Virtual Machine](images/vmware-player-home.jpg "Open a Virtual Machine")
     
 Choose a `.ovf` file to import.
 
-![Import OVF](images/vmware-player-choose-ovf.png "Import OVF")
+![Import OVF](images/vmware-player-choose-ovf.jpg "Import OVF")
 
 Wait for import to complete.
 
 Launch VM.
 
-![Power On](images/vmware-player-start-vm.png "Power On")
+![Power On](images/vmware-player-start-vm.jpg "Power On")
 
 
 ## Uploading to VMWare vCloud
