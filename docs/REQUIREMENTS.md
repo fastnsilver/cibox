@@ -54,6 +54,7 @@ Continue installing Ruby gems:
 
     gem install bundler
     gem install veewee
+    gem install veewee-to-packer
 
 Make sure that the following is in your `PATH`
 
