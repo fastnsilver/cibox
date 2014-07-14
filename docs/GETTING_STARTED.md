@@ -11,6 +11,34 @@ To list available definitions
     cd base-vm
     veewee vbox list
     
+## Prepare base-vm (optional)
+
+If you choose to build a Red Hat Enterprise Linux version of the `base-vm` you will need to authenticate to the Red Hat Customer Portal.  
+
+Place yourself within the definitions sub-folder
+
+    cd base-vm/definitions
+
+Then change directories to appropriate `rhel` prefixed sub-folder
+
+Edit and save the following as `rhcp.sh`
+
+    # Create .properties file that will encapsulate Red Hat Customer Portal credentials
+    # File will be used by base.sh to register RHEL 7 and add repos via subscription-manager
+    VEEWEE_HOME=/home/veewee
+    cat > $VEEWEE_HOME/rhcp.properties << EOM
+    username=<rhcp_username>
+    password=<rhcp_password>
+    EOM
+
+    # Bestow permissions 
+    chown veewee:veewee $VEEWEE_HOME/rhcp.properties
+
+Above substitute valid Red Hat Customer Portal account credentials for
+
+    <rhcp_username>
+    <rhcp_password>
+
 
 ## Build base-vm
 
