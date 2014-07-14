@@ -35,6 +35,7 @@ We hope this project expands beyond its initial contributors
 * [Providers](docs/PROVIDERS.md)
 * [Contribute](CONTRIBUTE.md)
 * [License](LICENSE.txt)
+* [FAQ](docs/FAQ.md)
 	
 
 
