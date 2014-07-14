@@ -44,21 +44,26 @@ Open a `cmd.exe` shell as Administrator, and type:
 Continue installing software packages:
 
     cinst git
-    cinst ruby
-    cinst ruby2.devkit
+    cinst packer
+    cinst ruby1.9
     cinst vagrant
     cinst virtualbox
-    cinst packer
+    
+Continue installing Ruby DevKit: 
+
+* Download [Ruby DevKit](https://github.com/downloads/oneclick/rubyinstaller/DevKit-tdm-32-4.5.2-20111229-1559-sfx.exe).  
+* Extract it into new sub-directory named `devkit` underneath the directory where you installed Ruby.
+    * In this case it will be in %ChocolateyInstall%/packages/ruby19x
+* Open cmd shell. 
+* Change directories into the devkit folder. 
+* Execute `dk.rb init`
+* Execute `dk.rb install`
 
 Continue installing Ruby gems:
 
     gem install bundler
     gem install veewee
     gem install veewee-to-packer
-
-Make sure that the following is in your `PATH`
-
-    // TODO validate where Chocolately installs above, then add VirtualBox, Vagrant, Ruby and Git bin directories
 
 
 ## Up Next
