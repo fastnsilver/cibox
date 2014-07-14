@@ -34,4 +34,4 @@ A: Open a shell. `cd factory-vm/var`. Review sub-folders.
 
 ### Q: How do I shutdown a running factory-vm?
 
-A: Open a shell. Open a shell. Execute `vagrant global-status`.  Review list. Select id. Execute `vagrant halt <id>` where `<id>` is the id of the base box you want to remove.
+A: Open a shell. Open a shell. Execute `vagrant global-status`.  Review list. Select id. Execute `vagrant halt <id>` where `<id>` is the id of the base box you want to shutdown.
