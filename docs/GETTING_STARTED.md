@@ -37,7 +37,22 @@ Change directories and run `vagrant up`
 
 E.g., to create a RHEL 7.0 factory VM
 
-    cd factory-vm
-    cd var
-    cd rhel7
+    cd factory-vm/var/rhel7
     vagrant up
+
+
+## Use factory-vm
+
+The following services are available via your web browser of choice:
+
+    http:\\localhost:<port>
+
+* Stash `port 7990`
+* JIRA `port 9080`
+* Go `port 8153`
+* Jenkins `port 8080`
+* Docker Registry `port 5000`
+
+You can ssh into your VM w/ Vagrant by opening a shell and typing:
+
+    vagrant ssh
