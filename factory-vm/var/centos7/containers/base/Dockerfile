@@ -1,6 +1,6 @@
 # Basics
 #
-FROM CentOS-7-20140625-x86_64-docker_01
+FROM centos:centos7
 MAINTAINER Chris Phillipson <fastnsilver@gmail.com>
 RUN yum update
 RUN yum install -y xmlstarlet software-properties-common python-software-properties

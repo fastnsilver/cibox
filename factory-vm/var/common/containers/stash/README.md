@@ -1,6 +1,6 @@
 # Stash Docker image
 
-This folder contains the Dockerfile and associated files for the ```alstom/stash``` docker image which aims to make it a breeze getting an Atlassian Stash instance up and running.
+This folder contains the Dockerfile and associated files for the ```fans/stash``` docker image which aims to make it a breeze getting an Atlassian Stash instance up and running.
 
 ## Database connection
 

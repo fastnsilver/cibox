@@ -1,6 +1,6 @@
 # Basics
 #
-FROM fns/factory-base
+FROM fans/factory-base
 MAINTAINER Chris Phillipson <fastnsilver@gmail.com>
 
 # Install Jira

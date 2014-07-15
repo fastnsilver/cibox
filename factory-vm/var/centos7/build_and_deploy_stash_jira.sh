@@ -6,23 +6,23 @@ if [ "$(docker run busybox echo 'test')" != "test" ]; then
   fi
 fi
 
-$SUDO docker build -t fns/factory-base containers/base
-$SUDO docker run -d --name postgres -p=5432:5432 fns/factory-base
+$SUDO docker build -t fans/factory-base containers/base
+$SUDO docker run -d --name postgres -p=5432:5432 fans/factory-base
 
 cd "$(dirname $0)"
-cat ../initialise_db.sh | $SUDO docker run --rm -i --link postgres:db fns/factory-base bash -
+cat ../initialise_db.sh | $SUDO docker run --rm -i --link postgres:db fans/factory-base bash -
 
-$SUDO docker build -t fns/stash ../common/containers/stash
-STASH_VERSION="$($SUDO docker run --rm fns/stash sh -c 'echo $STASH_VERSION')"
-$SUDO docker tag fns/stash fns/stash:$STASH_VERSION
+$SUDO docker build -t fans/stash ../common/containers/stash
+STASH_VERSION="$($SUDO docker run --rm fans/stash sh -c 'echo $STASH_VERSION')"
+$SUDO docker tag fans/stash fans/stash:$STASH_VERSION
 
-$SUDO docker run -d --name stash --link postgres:db -p 7990:7990 -p 7999:7999 fns/stash
+$SUDO docker run -d --name stash --link postgres:db -p 7990:7990 -p 7999:7999 fans/stash
 
-$SUDO docker build -t fns/jira ../common/containers/jira
-JIRA_VERSION="$($SUDO docker run --rm fns/jira sh -c 'echo $JIRA_VERSION')"
-$SUDO docker tag fns/jira fns/jira:$JIRA_VERSION
+$SUDO docker build -t fans/jira ../common/containers/jira
+JIRA_VERSION="$($SUDO docker run --rm fans/jira sh -c 'echo $JIRA_VERSION')"
+$SUDO docker tag fans/jira fans/jira:$JIRA_VERSION
 
-$SUDO docker run -d --name jira --link postgres:db --link stash:stash -p 8080:8080 fns/jira
+$SUDO docker run -d --name jira --link postgres:db --link stash:stash -p 8080:8080 fans/jira
 
 echo "Containers running..."
 $SUDO docker ps
