@@ -25,7 +25,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.network :forwarded_port, host: 8080, guest: 8080
   
   # Thoughtworks Go
-  config.vm.provision "shell", path: "../commonn/go-cd.sh"
+  config.vm.provision "shell", path: "../common/go-cd.sh"
   config.vm.network :forwarded_port, host: 8153, guest: 8153
   
   # Docker Registry
