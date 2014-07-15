@@ -2,8 +2,8 @@
 #
 FROM centos:centos7
 MAINTAINER Chris Phillipson <fastnsilver@gmail.com>
-RUN yum update
-RUN yum install -y xmlstarlet software-properties-common python-software-properties
+RUN yum -y update
+RUN yum -y install xmlstarlet software-properties-common python-software-properties
 
 # Configure YUM to exclude postgres in favor of local installation
 RUN sed "$ a\exclude=postgresql*" /etc/yum/pluginconf.d/rhnplugin.conf
