@@ -1,28 +1,27 @@
 # Base VM Generation
----
 
 ## Overview
 
-This readme documents the implementation details for Base VM Generation.  We use [Vagrant](http://www.vagrantup.com) for VM creation. But, Vagrant [relies on pre-built minimal VM images to create new VMs from](http://docs.vagrantup.com/v2/boxes/base.html).  Unfortunately Vagrant does not provide automation for this task.  For creating base VMs (base-boxes) we need another tool - Veewee. __***Note: There is another tool we may chose to improve this part of the workflow called [Packer](http://www.packer.io).  It is still under consideration*__
+These are the implementation details for Base VM Generation.  We use [Vagrant](http://www.vagrantup.com) for VM creation. But, Vagrant [relies on pre-built minimal VM images to create new VMs from](http://docs.vagrantup.com/v2/boxes/base.html).  Unfortunately Vagrant does not provide automation for this task.  For creating base VMs (base-boxes) we need another tool - Veewee. __***Note: There is another tool we may chose to improve this part of the workflow called [Packer](http://www.packer.io).  It is still under consideration*__
 
 
 ### Veewee for Creating Base VMs
 
-[Veewee](https://github.com/jedi4ever/veewee) is a tool created to fill the gap left by Vagrant.  It provides and abstraction over vendor-specific Virtualization technologies and software provisioning strategies to provide a more consistent way of describing and building a base VM from an operating system ISO.  In this case we are using VirtualBox as the virtualization tool to do the initial creation of the VM (driven by Veewee) and shell scripts to install (provision) the base software.  The basic workflow is captured in driver scripts in the `bin` directory desribed as follows:
+[Veewee](https://github.com/jedi4ever/veewee) is a tool created to fill the gap left by Vagrant.  It provides an abstraction over vendor-specific Virtualization technologies and software provisioning strategies to provide a more consistent way of describing and building a base VM from an operating system ISO.  In this case we are using VirtualBox as the virtualization tool to do the initial creation of the VM (driven by Veewee) and shell scripts to install (provision) the base software.  The basic workflow is captured in driver scripts in the `bin` directory desribed as follows:
 
 1. Veewee tells VirtualVBox (presumably via VBoxManage command line behind the scenes) to create the VM using information from `definitions.rb`
 2. Veewee tells VirtualBox where the ISO is with the OS distribution and provides (in the RHEL/CentOS case) a Kickstart file to allow for unattended OS initial installation and configuration.
 3. Once the VM is created, Veewee tells VirtualBox to add the VM as a box for Vagrant to use later to create other VMs
 4. The build script calls VBoxManage to export the VirtualBox VM to a portable OVF file for import to VMWare (in case it needs to be iported into vSphere)
 
-<p align="center">![Base Box Flow](docs/images/base-box-flow.png "Basic Workflow - Generating a base-box")
+<p align="center">![Base Box Flow](docs/images/base-box-flow.png "Basic Workflow - Generating a base-box")</p>
 
 
 ### VM Definitions 
 This project currently supports the creation of two types of base-boxes.  Each is described by a definitions.rb Ruby file.  
 
 * [RedHat Enterprise Linux (RHEL) - definitions.rb](definitions/rhel7-server-x64-base/definitions.rb)
-* [Centos - definitions.rb](definitions/centos7-server-x64-base/definitions.rb)
+* [CentOS - definitions.rb](definitions/centos7-server-x64-base/definitions.rb)
 
 The for each base-box the `definitions.rb` file describes:
 
@@ -69,9 +68,9 @@ After the basic creation of the VM and installation of the OS Veewee uploads and
 
 #### Post Install Files (Software Provisioning)
 
-Since RHEL and CentOS come from the same codebase their configuration is nearly identical.  The main difference is we don't register CentOS with RedHat Customer Portal and we don't subscribe to RHEL specific repositories.
+Since RHEL and CentOS come from the same codebase their configuration is nearly identical.  RHEL is an edition with commercial licensed support, and CentOS is an open-source, community supported edition.  The main difference is that we don't register CentOS with RedHat Customer Portal and we don't subscribe to RHEL specific repositories.
 
-In `definitions.rb` the postinstall_files section specifies what scripts to run after the VM comes up.  This only happens during construction of the VM.
+In `definitions.rb` the `:postinstall_files` section specifies what scripts to run after the VM comes up.  This only happens during construction of the VM.
 
 The current base-box definitions perform the following software installation and system configurations:
 
@@ -83,7 +82,7 @@ The current base-box definitions perform the following software installation and
 	* Registers the image with the RedHat Customer Portal sourcing the credentials from rhcp.sh
 	* Sets up subscriptions to RedHat specific YUM repositories:
 		* **rhel-7-server-optional-rpms** - needed to get docker-registry
-		* **rhel-7-server-extras-rpms** - needed to get various RedHad reviewed RPMs
+		* **rhel-7-server-extras-rpms** - needed to get various RedHat reviewed RPMs
 		* **rhel-7-server-thirdparty-oracle-java-rpms** - so we can use the official Java RPMs from Oracle
 * Installs the following minimal packages:
 	* **bzip2** - Many tar archives are compressed as bz2.  This allows tar to decompress them
@@ -97,13 +96,13 @@ The current base-box definitions perform the following software installation and
 	* **sqlite-devel** - needed for TBD
 	* **perl** - needed for TBD
 	* **wget** - needed to download source packages and other binary dependencies
-	* **dkms** - Dynamic Kernal Module Support - neeed to build VirtualBox Guest Additions
-	* **nfs-utils** - neeed to build VirtualBox Guest Additions
+	* **dkms** - Dynamic Kernal Module Support - needed for building VirtualBox Guest Additions
+	* **nfs-utils** - needed for building VirtualBox Guest Additions
 * Installs X-Windows
-	* Yum install **X-Windows System** (group) - neeed to build VirtualBox Guest Additions
+	* Yum install **X-Windows System** (group) - needed for building VirtualBox Guest Additions
 * Performs System Configurations:
-	* Add the veewee user:group - so veewee can provision software
-	* Add veewee to sudoers file - so veewee can provision software 
+	* Add the veewee user:group - so Veewee can provision software
+	* Add veewee to sudoers file - so Veewee can provision software 
 	* Configure ssh to not use DNS	- we can't rely on DNS in all deployment environments
 
 ##### git.sh
