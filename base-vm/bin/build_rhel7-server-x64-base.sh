@@ -1,7 +1,7 @@
 #!/bin/bash
 cd ..
 
-veewee vbox build 'rhel7-server-x64-base'
+veewee vbox build 'rhel7-server-x64-base' --force --no-gui
 
 veewee vbox validate 'rhel7-server-x64-base'
 

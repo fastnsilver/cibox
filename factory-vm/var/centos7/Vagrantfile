@@ -37,6 +37,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     vb.customize ["modifyvm", :id, "--memory", ram]
   end
 
+  # Synced folders
+  # See https://docs.vagrantup.com/v2/synced-folders/basic_usage.html
+  config.vm.synced_folder "containers", "/opt/docker-image"
+  config.vm.synced_folder "../common", "/opt/common"
+
   # Provision Docker containers
   config.vm.provision "shell", path: "build_and_deploy_stash_jira.sh"
 

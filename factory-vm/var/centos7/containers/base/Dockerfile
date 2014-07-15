@@ -12,7 +12,7 @@ RUN sed "$ a\exclude=postgresql*" /etc/yum/pluginconf.d/rhnplugin.conf
 RUN yum -y localinstall http://yum.postgresql.org/9.3/redhat/rhel-7-x86_64/pgdg-redhat93-9.3-2.noarch.rpm
 
 # Install PostgreSQL 
-yum -y install postgresql93-server
+RUN yum -y install postgresql93-server
 
 # Setup volume handling
 RUN /usr/sbin/groupadd atlassian

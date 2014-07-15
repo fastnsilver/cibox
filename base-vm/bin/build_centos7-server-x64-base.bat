@@ -1,6 +1,6 @@
 cd ..
 
-veewee vbox build 'centos7-server-x64-base' 
+veewee vbox build 'centos7-server-x64-base' --force --no-gui
 
 veewee vbox validate 'centos7-server-x64-base' 
 

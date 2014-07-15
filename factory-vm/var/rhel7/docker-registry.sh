@@ -18,4 +18,4 @@ systemctl status docker-registry
 # Seed registry with RHEL 7.0 Docker image
 # Assumes image may be found in /opt/docker-images
 # Mapped via synced folder, https://docs.vagrantup.com/v2/synced-folders/basic_usage.html
-docker load -i /opt/docker-images/rhel-server-docker-7.0-21.4.x86_64.tar.gz
+docker load -i /opt/docker-image/rhel-server-docker-7.0-21.4.x86_64.tar.gz
