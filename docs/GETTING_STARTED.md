@@ -11,6 +11,7 @@ To list available definitions
     cd base-vm
     veewee vbox list
     
+    
 ## Prepare base-vm (optional)
 
 If you choose to build a Red Hat Enterprise Linux version of the `base-vm` you will need to authenticate to the Red Hat Customer Portal.  
@@ -38,6 +39,9 @@ Above substitute valid Red Hat Customer Portal account credentials for
 
     <rhcp_username>
     <rhcp_password>
+
+Finally, you'll want to download the [RHEL 7.0 Binary DVD](https://access.redhat.com/downloads/content/69/ver=/rhel---7/7.0/x86_64/product-downloads) and place it in a directory called `iso` underneath the `base-vm` directory.
+    * Red Hat sure makes it difficult to `curl` or `wget` images from their Customer Portal!
 
 
 ## Build base-vm
