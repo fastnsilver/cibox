@@ -1,14 +1,9 @@
 #!/bin/bash
 
-# Install PostgreSQL
-# See https://wiki.postgresql.org/wiki/YUM_Installation
-
-# Become root
-sudo -i
-
 # Post install commands
-# Note: data directory will be /var/lib/pgsql/9.3/data
-service postgresql-9.3 initdb
+# Note: data directory will be /var/lib/pgsql/9.4/data
+/usr/pgsql-9.4/bin/initdb
 
 # Start PostgreSQL automatically on OS startup
-chkconfig postgresql-9.3 on
+systemctl enable postgresql-9.4.service
+systemctl start postgresql-9.4.service
