@@ -3,7 +3,9 @@
 FROM rhel-server-docker-7.0-21.4.x86_64
 MAINTAINER Chris Phillipson <fastnsilver@gmail.com>
 RUN yum -y update
-RUN yum -y install xmlstarlet software-properties-common python-software-properties
+RUN yum -y install bzip2 tar wget
+RUN wget http://apt.sw.be/redhat/el6/en/x86_64/rpmforge/RPMS/xmlstarlet-1.5.0-1.el6.rf.x86_64.rpm
+RUN yum -y localinstall xmlstarlet-1.5.0-1.el6.rf.x86_64.rpm
 
 # Configure YUM to exclude postgres in favor of local installation
 RUN sed "$ a\exclude=postgresql*" /etc/yum/pluginconf.d/rhnplugin.conf

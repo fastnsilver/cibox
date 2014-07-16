@@ -1,11 +1,11 @@
 cd ..
 
-veewee vbox build 'rhel7-server-x64-base' --force --no-gui
+@start /b /w cmd /c veewee vbox build 'rhel7-server-x64-base' --force --no-gui
 
-veewee vbox validate 'rhel7-server-x64-base' 
+REM @start /b /w cmd /c veewee vbox validate 'rhel7-server-x64-base' 
 
-veewee vbox export 'rhel7-server-x64-base' 
+@start /b /w cmd /c veewee vbox export 'rhel7-server-x64-base' 
 
-vagrant box add rhel7-server-x64-base rhel7-server-x64-base.box
+@start /b /w cmd /c vagrant box add rhel7-server-x64-base rhel7-server-x64-base.box --force
 
-VBoxManage export rhel7-server-x64-base --output rhel7-server-x64-base.ovf
+@start /b /w cmd /c VBoxManage export rhel7-server-x64-base --output rhel7-server-x64-base.ovf

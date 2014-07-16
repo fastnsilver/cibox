@@ -21,6 +21,6 @@ ADD launch.bash /launch
 
 WORKDIR /opt/jira
 VOLUME ["/opt/atlassian-home"]
-EXPOSE 8080
+EXPOSE 9080
 USER jira
 CMD ["/launch"]

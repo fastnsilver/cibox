@@ -22,7 +22,7 @@ $SUDO docker build -t fans/jira /opt/common/containers/jira
 JIRA_VERSION="$($SUDO docker run --rm fans/jira sh -c 'echo $JIRA_VERSION')"
 $SUDO docker tag fans/jira fans/jira:$JIRA_VERSION
 
-$SUDO docker run -d --name jira --link postgres:db --link stash:stash -p 8080:8080 fans/jira
+$SUDO docker run -d --name jira --link postgres:db --link stash:stash -p 9080:9080 fans/jira
 
 echo "Containers running..."
 $SUDO docker ps
