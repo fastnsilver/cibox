@@ -6,7 +6,7 @@
 * Ruby >= v1.9.3
 * Ruby devkit >= v1.9.3
 * Vagrant >= v1.6.3
-* VirtualBox >= v4.3.12
+* VirtualBox >= v4.3.14
 * Veewee >= v0.3.12
 * Packer >= v0.6.0
 
