@@ -1,0 +1,124 @@
+
+defaultTasks 'downloadVBoxPatch', 'build', 'validate', 'register', 'export', 'shutdownVbox'
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.0'
+}
+
+ant.condition(property: "os", value: "windows") { os(family: "windows") }
+ant.condition(property: "os", value: "unix"   ) { os(family: "unix")    }
+
+if(hasProperty('box')) {
+	project.ext.box = property('box')
+} else {
+	project.ext.box = "none"
+}
+
+ext {
+
+	checkforBoxName = {
+	if(project.ext.box == "none") {
+		ant.fail("You must provide a box name to build.\n\n\tUse \'gradle list\' to list available boxes.\n\n\tUse \'gradle -Pbox=<box name>\' to build, register, and export it for downstream use")
+	}
+}
+
+	buildDir = 'build'
+
+	vBoxPatchURL = 'https://www.virtualbox.org/download/testcase/VBoxGuestAdditions_4.3.13-94832.iso'
+	vBoxPatchTargetFile = 'iso/VBoxGuestAdditions_4.3.12.iso'
+
+	switch(ant.properties.os){
+        case 'windows':
+            buildCommandLine = ["cmd", "/c", "veewee vbox build \"${project.ext.box}\" --force --nogui"]
+			validateCommandLine = ["cmd", "/c", "echo 'TODO: Write server specs to validate image'"]
+			exportCommandLine = ["cmd", "/c", "veewee vbox export \"${project.ext.box}\" --force"]
+			registerCommandLine = ["cmd", "/c", "vagrant box add ${project.ext.box} ${project.ext.box}.box --force"]
+			exportOVFCommandLine = ["cmd", "/c", "VBoxManage export ${project.ext.box} --output ${project.ext.box}.ovf"]
+			shutdownVboxCommandLine = ["cmd", "/c", "VBoxManage controlvm ${project.ext.box} poweroff"]
+			listCommandLine = ["cmd", "/c", "veewee vbox list"]
+            break
+        case 'unix':
+            buildCommandLine = ["veewee vbox build '${project.ext.box}' --force --nogui"]
+			validateCommandLine = ["echo 'TODO: Write server specs to validate image'"]
+			exportCommandLine = ["veewee vbox export \"${project.ext.box}\" --force"]
+			registerCommandLine = ["vagrant box add ${project.ext.box} ${project.ext.box}.box --force"]
+			exportOVFCommandLine = ["VBoxManage export ${project.ext.box} --output ${project.ext.box}.ovf"]
+			shutdownVboxCommandLine = ["VBoxManage controlvm ${project.ext.box} poweroff"]
+			listCommandLine = ["veewee vbox list"]
+            break
+    }	
+}
+
+task initBuildDir {
+	group = "Base Box Tasks"
+	description = "Creates the build directory: ${buildDir}"
+    buildDir.mkdirs()
+}
+
+
+task downloadVBoxPatch {
+	group = "Base Box Tasks"
+	description = "Downloads and renames a (hopefully temporary) workaround patch for VirtualBox Guest Additions"
+	def f = new File(vBoxPatchTargetFile)
+	if (!f.exists()) {
+    	new URL(vBoxPatchURL).withInputStream { i -> f.withOutputStream{ it << i }}
+	}	
+} 
+
+task build(type: Exec) {
+	doFirst checkforBoxName
+	group = "Base Box Tasks"
+	description = "Build a base box [current: ${box}]"
+	commandLine buildCommandLine
+}
+
+task validate(type:Exec) {
+	doFirst checkforBoxName
+	group = "Base Box Tasks"
+	description = "Validate the base box [current: ${box}]"
+	commandLine validateCommandLine 
+}
+
+task export(type:Exec) {
+	doFirst checkforBoxName
+	group = "Base Box Tasks"
+	description = "Export the base box to a Vagrant 'box' format [current: ${box}]"
+	commandLine exportCommandLine
+}
+
+task register(type:Exec) {
+	doFirst checkforBoxName
+	group = "Base Box Tasks"
+	description = "Import the previously exported [current: ${box}] box into Vagrant"
+	commandLine registerCommandLine
+}
+
+task exportOVF(type:Exec, dependsOn: 'initBuildDir') {
+	doFirst checkforBoxName
+	group = "Base Box Tasks"
+	description = "Export the VirtualBox VM [current: ${box}] to a portable OVF format"
+	workingDir = project.ext.buildDir
+	commandLine exportOVFCommandLine
+}
+
+task shutdownVbox(type: Exec) {
+	group = "Base Box Tasks"
+	description = "Shutdown the VirtualBox VM: [current: ${box}]"
+	commandLine shutdownVboxCommandLine
+	ignoreExitValue true
+	standardOutput = new ByteArrayOutputStream()
+	errorOutput = new ByteArrayOutputStream()
+}
+
+task clean(type: Delete, dependsOn: 'shutdownVbox') {
+	group = "Base Box Tasks"
+	description = "Deletes ${buildDir} directory"
+  	delete 'build'
+}
+
+task list(type: Exec) {
+	group = "Base Box Tasks"
+	description = "List the base box definitions available to build"
+	commandLine listCommandLine
+}
+
