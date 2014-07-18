@@ -62,7 +62,8 @@ on Windows
 ### with Gradle
 You can also use Gradle to build, see [Gradle Builds](base-vm/docs/GRADLE-BUILDS.md)
 
-Now you have a base box for use with Vagrant.
+### the end result...
+You will have a base box for use with Vagrant.
 
 
 ## Build factory-vm
