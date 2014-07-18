@@ -1,9 +1,9 @@
 
-defaultTasks 'downloadVBoxPatch', 'build', 'validate', 'register', 'export', 'shutdownVbox'
-
 task wrapper(type: Wrapper) {
     gradleVersion = '2.0'
 }
+
+defaultTasks 'downloadVBoxPatch', 'build', 'validate', 'register', 'export', 'shutdownVbox'
 
 ant.condition(property: "os", value: "windows") { os(family: "windows") }
 ant.condition(property: "os", value: "unix"   ) { os(family: "unix")    }
@@ -49,59 +49,53 @@ ext {
     }	
 }
 
-task initBuildDir {
-	group = "Base Box Tasks"
-	description = "Creates the build directory: ${buildDir}"
-    buildDir.mkdirs()
-}
 
-
-task downloadVBoxPatch {
+task downloadVBoxPatch << {
 	group = "Base Box Tasks"
 	description = "Downloads and renames a (hopefully temporary) workaround patch for VirtualBox Guest Additions"
 	def f = new File(vBoxPatchTargetFile)
+	"iso".mkdirs()
 	if (!f.exists()) {
     	new URL(vBoxPatchURL).withInputStream { i -> f.withOutputStream{ it << i }}
 	}	
 } 
 
-task build(type: Exec) {
+task build(type: Exec) << {
 	doFirst checkforBoxName
 	group = "Base Box Tasks"
 	description = "Build a base box [current: ${box}]"
 	commandLine buildCommandLine
 }
 
-task validate(type:Exec) {
+task validate(type:Exec) << {
 	doFirst checkforBoxName
 	group = "Base Box Tasks"
 	description = "Validate the base box [current: ${box}]"
 	commandLine validateCommandLine 
 }
 
-task export(type:Exec) {
+task export(type:Exec) << {
 	doFirst checkforBoxName
 	group = "Base Box Tasks"
 	description = "Export the base box to a Vagrant 'box' format [current: ${box}]"
 	commandLine exportCommandLine
 }
 
-task register(type:Exec) {
+task register(type:Exec) << {
 	doFirst checkforBoxName
 	group = "Base Box Tasks"
 	description = "Import the previously exported [current: ${box}] box into Vagrant"
 	commandLine registerCommandLine
 }
 
-task exportOVF(type:Exec, dependsOn: 'initBuildDir') {
+task exportOVF(type:Exec) << {
 	doFirst checkforBoxName
 	group = "Base Box Tasks"
 	description = "Export the VirtualBox VM [current: ${box}] to a portable OVF format"
-	workingDir = project.ext.buildDir
 	commandLine exportOVFCommandLine
 }
 
-task shutdownVbox(type: Exec) {
+task shutdownVbox(type: Exec) << {
 	group = "Base Box Tasks"
 	description = "Shutdown the VirtualBox VM: [current: ${box}]"
 	commandLine shutdownVboxCommandLine
@@ -110,13 +104,7 @@ task shutdownVbox(type: Exec) {
 	errorOutput = new ByteArrayOutputStream()
 }
 
-task clean(type: Delete, dependsOn: 'shutdownVbox') {
-	group = "Base Box Tasks"
-	description = "Deletes ${buildDir} directory"
-  	delete 'build'
-}
-
-task list(type: Exec) {
+task list(type: Exec) << {
 	group = "Base Box Tasks"
 	description = "List the base box definitions available to build"
 	commandLine listCommandLine
