@@ -60,7 +60,7 @@ on Windows
     build_rhel7-server-x64-base.bat    
 
 ### with Gradle
-You can also use Gradle to build, see [Gradle Builds](base-vm/docs/GRADLE-BUILDS.md)
+You can also use Gradle to build, see [Gradle Builds](../base-vm/docs/GRADLE-BUILDS.md)
 
 ### the end result...
 You will have a base box for use with Vagrant.
