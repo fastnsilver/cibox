@@ -16,7 +16,7 @@ __***Note: There is another tool we may chose to improve this part of the workfl
 3. Once the VM is created, Veewee tells VirtualBox to add the VM as a box for Vagrant to use later to create other VMs
 4. The build script calls VBoxManage to export the VirtualBox VM to a portable OVF file for import to VMWare (in case it needs to be iported into vSphere)
 
-<p align="center">![Base Box Flow](docs/images/base-vm-generation-flow.png "Basic Workflow - Generating a base-box")
+<p align="center">![Base Box Flow](docs/images/base-vm-flow.png "Basic Workflow - Generating a base-box")
 
 
 ### VM Definitions 
