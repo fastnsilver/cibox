@@ -46,6 +46,7 @@ Finally, you'll want to download the [RHEL 7.0 Binary DVD](https://access.redhat
 
 ## Build base-vm
 
+### with Script
 To create and export a base VM, run one of the available scripts in the `base-vm/bin` folder.
 
 E.g., to create and export a RHEL 7.0 base VM, run
@@ -57,6 +58,9 @@ on Linux / Mac OS X
 on Windows
 
     build_rhel7-server-x64-base.bat    
+
+### with Gradle
+You can also use Gradle to build, see [Gradle Builds](base-vm/docs/GRADLE-BUILDS.md)
 
 Now you have a base box for use with Vagrant.
 

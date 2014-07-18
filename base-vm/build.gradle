@@ -17,10 +17,10 @@ if(hasProperty('box')) {
 ext {
 
 	checkforBoxName = {
-	if(project.ext.box == "none") {
-		ant.fail("You must provide a box name to build.\n\n\tUse \'gradle list\' to list available boxes.\n\n\tUse \'gradle -Pbox=<box name>\' to build, register, and export it for downstream use")
+		if(project.ext.box == "none") {
+			ant.fail("You must provide a box name to build.\n\n\tUse \'gradle list\' to list available boxes.\n\n\tUse \'gradle -Pbox=<box name>\' to build, register, and export it for downstream use")
+		}
 	}
-}
 
 	buildDir = 'build'
 
