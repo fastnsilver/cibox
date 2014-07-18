@@ -3,7 +3,9 @@
 "CI in a Box" offers an alternative mechanism for creating base VMs.
 
 [Gradle](http://www.gradle.org/docs/current/userguide/overview.html) is a build automation Domain Specific Language ([DSL](http://www.gradle.org/docs/current/dsl/)). 
-We employ the DSL to declare tasks that wrap calls to parameterized Veewee and Vagrant commands.  
+We employ the DSL to declare tasks that wrap calls to parameterized Veewee and Vagrant commands.
+
+*Note: We may replace part or all of this with [Packer](http://packer.io)
 
 
 ## Quick Start
@@ -11,13 +13,16 @@ We employ the DSL to declare tasks that wrap calls to parameterized Veewee and V
 ### Windows
 
 Open a `cmd.exe` shell and place yourself within the `cibox` directory:
+	
+	cd base-vm
+	
+List the currently defined base boxes that can be generated:
 
-    cd base-vm
+	gradlew list
+	
+To build a base vm execute:
 
-Execute the Gradle Wrapper:
-
-    gradlew
-
+    gradlew -Pbox=<name of box to generate>
 
 ### Linux or Mac OS X
 
@@ -33,28 +38,32 @@ If not, then:
 
     chmod +x gradlew
 
-Execute the Gradle Wrapper:
+List the currently defined base boxes that can be generated:
 
-    ./gradlew
+	gradlew list
+	
+To build a base vm execute:
 
+    gradlew -Pbox=<name of box to generate> // taken from previous step
+	
+Example:
+
+	gradlew -Pbox=centos7-server-x64-base
+	
+### What it does
 
 Having followed the instructions above:
 
-* Gradle binaries and any dependencies are downloaded and installed
-* An attempt will be made to execute a build of a base-vm using the default tasks
+* The default gradle tasks defined for this build are executed: 
 
-You should see a message like:
-
-    You must provide a box name to build.
-
-        Use 'gradle list' to list available boxes.
-
-        Use 'gradle -Pbox=<box name>' to build, register, and export it for downstream use
-
-
-So, if you wanted to build a CentOS 7 base VM, execute:
-
-    gradle -Pbox=centos7-server-x64-base
+	* downloadVBoxPatch
+	* build
+	* validate
+	* register
+	* export
+	* shutdownVbox
+	
+Use `gradlew tasks` to view descriptions of these tasks.  The result of this build is a portable OVF format VM suitable for import into a number of VM environments. The OFV file will appear in the base-vm directory.
 
 
 ## Additional Resources
