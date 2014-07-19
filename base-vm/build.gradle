@@ -1,3 +1,14 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'de.undercouch:gradle-download-task:1.0'
+    }
+}
+
+apply plugin: 'download-task'
+import de.undercouch.gradle.tasks.download.Download
 
 task wrapper(type: Wrapper) {
     gradleVersion = '2.0'
@@ -24,7 +35,8 @@ ext {
 
 	buildDir = 'build'
 
-	vBoxPatchURL = 'https://www.virtualbox.org/download/testcase/VBoxGuestAdditions_4.3.13-94832.iso'
+	vBoxPatchFile = 'VBoxGuestAdditions_4.3.13-94832.iso'
+	vBoxPatchURL = "https://www.virtualbox.org/download/testcase/${vBoxPatchFile}"
 	vBoxPatchTargetFile = 'iso/VBoxGuestAdditions_4.3.12.iso'
 
 	switch(ant.properties.os){
@@ -47,17 +59,22 @@ ext {
     }	
 }
 
-
-task downloadVBoxPatch << {
-	group = "Base Box Tasks"
-	description = "Downloads and renames a (hopefully temporary) workaround patch for VirtualBox Guest Additions"
-	def f = new File(vBoxPatchTargetFile)
+task initISODir() {
 	def iso = new File("iso")
 	iso.mkdirs()
-	if (!f.exists()) {
-    	new URL(vBoxPatchURL).withInputStream { i -> f.withOutputStream{ it << i }}
-	}	
-} 
+}
+
+
+task downloadVBoxPatch(type: Download, dependsOn: 'initISODir') {
+	group = "Base Box Tasks"
+	description = "Downloads and renames a (hopefully temporary) workaround patch for VirtualBox Guest Additions"
+    src vBoxPatchURL
+    dest 'iso'
+    overwrite true
+    doLast {
+        file("iso/${vBoxPatchFile}").renameTo(file(vBoxPatchTargetFile))
+    }
+}
 
 task build(type: Exec) {
 	doFirst checkforBoxName
