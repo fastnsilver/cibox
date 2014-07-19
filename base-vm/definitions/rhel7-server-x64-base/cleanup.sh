@@ -11,6 +11,10 @@ rm -f *.sh
 rm -f *.properties
 # Remove EPEL RPM
 rm -f *.rpm
+# Remove Git build dir and source
+rm -rf git*
+# TODO - we should probably remove the veewee and vagrant
+# 	users at some point for security reasons (or generate keys)
 
 # Remove traces of mac address from network configuration
 # RJP - had to change this from
