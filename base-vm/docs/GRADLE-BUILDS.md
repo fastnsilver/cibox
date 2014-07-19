@@ -22,7 +22,7 @@ List the currently defined base boxes that can be generated:
 	
 To build a base vm execute:
 
-    gradlew.bat -Pbox=<name of box to generate>
+    gradlew.bat -Pbox=<name of box to generate> // taken from previous step
 
 ### Linux or Mac OS X
 
