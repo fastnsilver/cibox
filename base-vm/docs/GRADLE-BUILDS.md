@@ -18,11 +18,11 @@ Open a `cmd.exe` shell and place yourself within the `cibox` directory:
 	
 List the currently defined base boxes that can be generated:
 
-	gradlew list
+	gradlew.bat list
 	
 To build a base vm execute:
 
-    gradlew -Pbox=<name of box to generate>
+    gradlew.bat -Pbox=<name of box to generate>
 
 ### Linux or Mac OS X
 
@@ -63,7 +63,7 @@ Having followed the instructions above:
 	* export
 	* shutdownVbox
 	
-Use `gradlew tasks` to view descriptions of these tasks.  The result of this build is a portable OVF format VM suitable for import into a number of VM environments. The OFV file will appear in the base-vm directory.
+Use `gradlew tasks` to view descriptions of these tasks.  The result of this build is a portable OVF format VM suitable for import into a number of VM environments. The OVF file will appear in the `base-vm` directory.
 
 
 ## Additional Resources
