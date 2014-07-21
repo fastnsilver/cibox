@@ -1,20 +1,7 @@
 #!/bin/bash
 
-set -xe
+trap 'exit' ERR
 date > /etc/vagrant_box_build_time
-
-################################################################################
-# Install VirtualBox Guest Additions
-################################################################################
-
-VBOX_VERSION=$(cat /home/vagrant/.vbox_version)
-mount -o loop VBoxGuestAdditions_$VBOX_VERSION.iso /mnt
-
-# Shut up GuestAdditions about unnecessary return codes.
-yes | sh /mnt/VBoxLinuxAdditions.run || true
-umount /mnt
-
-rm VBoxGuestAdditions_$VBOX_VERSION.iso
 
 
 ################################################################################

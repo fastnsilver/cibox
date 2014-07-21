@@ -2,10 +2,11 @@
   "builders": [
     {
       "type": "virtualbox-iso",
+      "headless": true,
       "boot_command": [
         "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ks.cfg<enter><wait>"
       ],
-      "boot_wait": "10s",
+      "boot_wait": "12s",
       "disk_size": 10140,
       "guest_os_type": "RedHat_64",
       "http_directory": "http",
@@ -15,7 +16,7 @@
       "ssh_username": "vagrant",
       "ssh_password": "vagrant",
       "ssh_port": 22,
-      "ssh_wait_timeout": "10000s",
+      "ssh_wait_timeout": "20m",
       "shutdown_command": "echo 'shutdown -P now' > shutdown.sh; echo 'vagrant'|sudo -S sh 'shutdown.sh'",
       "guest_additions_path": "iso/VBoxGuestAdditions_{{.Version}}.iso",
       "virtualbox_version_file": ".vbox_version",
@@ -30,32 +31,9 @@
           "modifyvm",
           "{{.Name}}",
           "--cpus",
-          "4"
+          "2"
         ]
       ]
-    },
-    {
-      "type": "vmware-iso",
-      "boot_command": [
-        "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ks.cfg<enter><wait>"
-      ],
-      "boot_wait": "10s",
-      "disk_size": 10140,
-      "guest_os_type": "RedHat_64",
-      "http_directory": "http",
-      "iso_checksum": "713ea7847adcdd1700e92429f212721a",
-      "iso_checksum_type": "md5",
-      "iso_url": "iso/CentOS-7.0-1406-x86_64-DVD.iso",
-      "ssh_username": "vagrant",
-      "ssh_password": "vagrant",
-      "ssh_port": 22,
-      "ssh_wait_timeout": "10000s",
-      "shutdown_command": "echo 'shutdown -P now' > shutdown.sh; echo 'vagrant'|sudo -S sh 'shutdown.sh'",
-      "vmx_data": {
-        "memsize": "4096",
-        "numvcpus": "4",
-        "cpuid.coresPerSocket": "1"
-      }
     }
   ],
   "provisioners": [
@@ -63,17 +41,17 @@
       "type": "shell",
       "scripts": [
         "scripts/setup.sh",
+        "scripts/virtualbox-guest-additions.sh",
         "scripts/vagrant.sh",
         "scripts/compact.sh"
       ],
-      "override": {
-        "virtualbox-iso": {
-          "execute_command": "echo 'vagrant'|sudo -S sh '{{.Path}}'"
-        },
-        "vmware-iso": {
-          "execute_command": "echo 'vagrant'|sudo -S sh '{{.Path}}'"
-        }
-      }
+      "execute_command": "echo 'vagrant'|sudo -S sh '{{.Path}}'"
+    }
+  ],
+  "post-processors": [
+    {
+     "type": "vagrant",
+     "output": "centos-7.0-x64_virtualbox.box"
     }
   ]
 }
