@@ -23,3 +23,8 @@ AutoPartition.app
 **/rhcp.sh
 *.vmdk
 *.ovf
+.idea
+*.iml
+target
+packer_cache
+.vagrant
