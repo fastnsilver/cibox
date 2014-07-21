@@ -27,8 +27,8 @@ In order to contribute anything, you'll want to follow these steps first:
 
 If you have a new and amazing "CI in a Box" definition, share your 'definition'. 
 
-* Before saving changes to a 'template', first try your changes in `base-vm/definitions/<mynewos>/`
-     * Follow the same naming schema of existing boxes (explained in the [Basics](docs/basics.md) doc)
+* Before saving changes to a 'definition', first try your changes in `base-vm/definitions/<mynewos>/`
+     * Follow the same naming schema of existing boxes `<os><version>-server-<arch>-base`
 * Build the box and run the **validation** tests
    
 
