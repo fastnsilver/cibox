@@ -23,11 +23,11 @@ In order to contribute anything, you'll want to follow these steps first:
 * Check out a new branch to make your changes on: `git checkout -b <your_new_patch>`
 
 
-### For adding a new base-vm Definition
+### For adding a new base-vm variant
 
-If you have a new and amazing "CI in a Box" definition, share your 'definition'. 
+If you have a new and amazing "CI in a Box" definition, share your 'variant'. 
 
-* Before saving changes to a 'definition', first try your changes in `base-vm/definitions/<mynewos>/`
+* Before saving changes to a 'variant', first try your changes in `base-vm/<mynewos>/`
      * Follow the same naming schema of existing boxes `<os><version>-server-<arch>-base`
 * Build the box and run the **validation** tests
    

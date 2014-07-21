@@ -4,63 +4,49 @@ Obtain the source
 
     git clone https://github.com/fastnsilver/cibox.git
     
-You start by generating a base VM.  Base VM definitions may be found in `base-vm/definitions` folder.
+You start by generating a base VM.  Base VM variants may be found in `base-vm` folder.
 
-To list available definitions
+To list available variants
 
     cd base-vm
-    veewee vbox list
+    ls -la
     
     
 ## Prepare base-vm (optional)
 
 If you choose to build a Red Hat Enterprise Linux version of the `base-vm` you will need to authenticate to the Red Hat Customer Portal.  
 
-Place yourself within the definitions sub-folder
-
-    cd base-vm/definitions
-
-Then change directories to appropriate `rhel` prefixed sub-folder
+Change directories to appropriate `rhel` prefixed sub-folder
 
 Edit and save the following as `rhcp.sh`
 
     # Create .properties file that will encapsulate Red Hat Customer Portal credentials
     # File will be used by base.sh to register RHEL 7 and add repos via subscription-manager
-    VEEWEE_HOME=/home/veewee
-    cat > $VEEWEE_HOME/rhcp.properties << EOM
+    VAGRANT_HOME=/home/vagrant
+    cat > $VAGRANT_HOME/rhcp.properties << EOM
     username=<rhcp_username>
     password=<rhcp_password>
     EOM
 
     # Bestow permissions 
-    chown veewee:veewee $VEEWEE_HOME/rhcp.properties
+    chown vagrant:vagrant $VAGRANT_HOME/rhcp.properties
 
 Above substitute valid Red Hat Customer Portal account credentials for
 
     <rhcp_username>
     <rhcp_password>
 
-Finally, you'll want to download the [RHEL 7.0 Binary DVD](https://access.redhat.com/downloads/content/69/ver=/rhel---7/7.0/x86_64/product-downloads) and place it in a directory called `iso` underneath the `base-vm` directory.
+Finally, you'll want to download the [RHEL 7.0 Binary DVD](https://access.redhat.com/downloads/content/69/ver=/rhel---7/7.0/x86_64/product-downloads) and place it in a directory called `iso` underneath the `rhel` directory.
     * Red Hat sure makes it difficult to `curl` or `wget` images from their Customer Portal!
 
 
 ## Build base-vm
 
-### with Script
-To create and export a base VM, run one of the available scripts in the `base-vm/bin` folder.
+### with Packer
 
-E.g., to create and export a RHEL 7.0 base VM, run
+    packer build <packer_filename>.json
 
-on Linux / Mac OS X
-
-    build_rhel7-server-x64-base.sh
-    
-on Windows
-
-    build_rhel7-server-x64-base.bat    
-
-### with Gradle
-You can also use Gradle to build, see [Gradle Builds](../base-vm/docs/GRADLE-BUILDS.md)
+`<packer_filename>` is the name of the build file used by [Packer](http://www.packer.io/docs/command-line/introduction.html).
 
 ### the end result...
 You will have a base box for use with Vagrant.
@@ -68,13 +54,13 @@ You will have a base box for use with Vagrant.
 
 ## Build factory-vm
 
-To create a factory VM, review the variants available in the `factory-vm/var` folder.
+To create a factory VM, review the variants available in the `factory-vm` folder.
 
 Change directories and run `vagrant up`
 
 E.g., to create a RHEL 7.0 factory VM
 
-    cd factory-vm/var/rhel7
+    cd factory-vm/rhel7
     vagrant up
 
 
