@@ -7,8 +7,7 @@
 * Ruby devkit >= v1.9.3
 * Vagrant >= v1.6.3
 * VirtualBox >= v4.3.12
-* Veewee >= v0.3.12
-* Packer >= v0.6.0
+* Packer >= v0.6.1
 
 
 If you're in a hurry, skip to the relevant sub-section under Quickstarts below.
@@ -74,8 +73,7 @@ Continue installing Ruby DevKit:
 Continue installing Ruby gems:
 
     gem install bundler
-    gem install veewee
-    gem install veewee-to-packer
+
 
 Verify your Windows `Path` by opening a `cmd.exe` shell and typing: 
 
@@ -92,7 +90,6 @@ For each software package installed, open a shell and type
 * Ruby `ruby -v`
 * Vagrant `vagrant -v`
 * VirtualBox `VBoxManage`
-* Veewee `veewee version`
 * Packer `packer --version`
 
 
