@@ -1,5 +1,8 @@
-TEMPLATE=rhel-7.0-x64_vmware
-cd ../$TEMPLATE
+#!/bin/sh
+
+DIST=rhel-7.0-x64
+TEMPLATE=$DIST_vmware
+cd ../$DIST
 
 packer --version
 packer inspect $TEMPLATE.json

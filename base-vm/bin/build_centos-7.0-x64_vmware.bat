@@ -1,5 +1,6 @@
-set TEMPLATE=centos-7.0-x64_vmware
-cd ..\%TEMPLATE%
+set DIST=centos-7.0-x64
+set TEMPLATE=%DIST%_vmware
+cd ..\%DIST%
 
 packer --version
 packer inspect %TEMPLATE%.json
