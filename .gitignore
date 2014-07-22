@@ -27,3 +27,4 @@ AutoPartition.app
 *.iml
 target
 packer_cache
+output-vmware-iso
