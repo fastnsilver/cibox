@@ -23,8 +23,10 @@ rm -rf /tmp/*
 
 # Remove traces of MAC address from network configuration
 rm -f /etc/udev/rules.d/70-persistent-net.rules
-sed -i '/^UUID/d' /etc/sysconfig/network-scripts/ifcfg-enp0s3
-sed -i '/^HWADDR/d' /etc/sysconfig/network-scripts/ifcfg-enp0s3
+if [ -f /etc/sysconfig/network-scripts/ifcfg-enp0s3 ]; then
+	sed -i '/^UUID/d' /etc/sysconfig/network-scripts/ifcfg-enp0s3
+	sed -i '/^HWADDR/d' /etc/sysconfig/network-scripts/ifcfg-enp0s3
+fi
 
 # Expect the drive zero exhaustion to fail out and then delete.
 dd if=/dev/zero of=/EMPTY bs=1M || true
