@@ -29,5 +29,3 @@ sed -i '/^HWADDR/d' /etc/sysconfig/network-scripts/ifcfg-enp0s3
 # Expect the drive zero exhaustion to fail out and then delete.
 dd if=/dev/zero of=/EMPTY bs=1M || true
 rm -f /EMPTY
-
-sync

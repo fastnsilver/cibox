@@ -10,6 +10,7 @@ subscription-manager register --username $username --password $password --auto-a
 
 yum update -y
 yum install -y bzip2 curl gcc kernel-devel kernel-headers -avahi -bluez-utils -dogtail -kudzu -ipw2100-firmware -ipw2200-firmware -ivtv-firmware wget
+yum install -y net-tools
 yum groupinstall -y "Development Tools" "X Window System"
 
 # disable unnecessary services
