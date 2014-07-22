@@ -3,20 +3,19 @@
     {
       "type": "vmware-iso",
       "boot_command": [
-        "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ks.cfg<enter><wait>"
+        "<esc>",
+        "<wait>linux ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ks.cfg<enter>"
       ],
       "boot_wait": "12s",
       "disk_size": 10140,
-      "guest_os_type": "RedHat_64",
-      "http_directory": "http",
+      "guest_os_type": "linux",
+      "http_directory": "./http",
       "iso_checksum": "08961a5cb32d2cdf72026bec43876b7f",
       "iso_checksum_type": "md5",
       "iso_url": "iso/rhel-server-7.0-x86_64-dvd.iso",
       "ssh_username": "vagrant",
       "ssh_password": "vagrant",
-      "ssh_port": 22,
       "ssh_wait_timeout": "20m",
-      "shutdown_command": "echo 'shutdown -P now' > shutdown.sh; echo 'vagrant'|sudo -S sh 'shutdown.sh'",
       "vmx_data": {
         "memsize": "4096",
         "numvcpus": "4",
