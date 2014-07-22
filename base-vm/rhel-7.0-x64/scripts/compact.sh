@@ -8,6 +8,8 @@ trap 'exit' ERR
 
 # Remove ruby build libs
 yum -y remove zlib-devel openssl-devel readline-devel
+yum -y erase gtk2 libXext libXfixes libXrender hicolor-icon-theme avahi \
+        freetype bitstream-vera-fonts
 
 # Cleanup other files we do not need
 yum -y groupremove "Dialup Networking Support" Editors "Printing Support" "Additional Development" "E-mail server"

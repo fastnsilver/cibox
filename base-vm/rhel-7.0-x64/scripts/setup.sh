@@ -6,8 +6,8 @@ trap 'exit' ERR
 # Update OS installation
 ################################################################################
 
-yum install -y update
-yum install -y upgrade
+yum -y update
+yum -y upgrade
 
 
 ################################################################################

@@ -16,7 +16,7 @@ To list available variants
 
 If you choose to build a Red Hat Enterprise Linux version of the `base-vm` you will need to authenticate to the Red Hat Customer Portal.  
 
-Change directories to appropriate `rhel` prefixed sub-folder
+Change directories to appropriate `rhel` prefixed `scripts` sub-folder
 
 Edit and save the following as `rhcp.sh`
 

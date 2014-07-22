@@ -7,16 +7,15 @@ trap 'exit' ERR
 ################################################################################
 
 VBOX_VERSION=$(cat /home/vagrant/.vbox_version)
+VBOX_VERSION=$(cat /home/vagrant/.vbox_version)
+VBOX_ISO=/home/vagrant/VBoxGuestAdditions_${VBOX_VERSION}.iso
 
 # Mount the disk image
-cd /tmp
-mkdir /tmp/isomount
-mount -o loop /root/VBoxGuestAdditions_$VBOX_VERSION.iso /tmp/isomount
+mount -o loop $VBOX_ISO /mnt
 
 # Install the additions
 # Keep quiet about unnecessary return codes.
 yes | sh /tmp/isomount/VBoxLinuxAdditions.run || true
 
-# Cleanup
-umount isomount
-rm -Rf isomount /root/VBoxGuestAdditions_$VBOX_VERSION.iso
+# Unmount
+umount /mnt
