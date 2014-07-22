@@ -33,7 +33,8 @@
         "scripts/vmware-guest-additions.sh",
         "scripts/vagrant.sh",
         "scripts/compact.sh"
-      ]
+      ],
+      "execute_command": "echo 'vagrant'|{{.Vars}} sudo -E -S sh '{{.Path}}'"
     }
   ],
   "post-processors": [
