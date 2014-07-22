@@ -1,0 +1,58 @@
+{
+  "builders": [
+    {
+      "type": "virtualbox-iso",
+      "headless": true,
+      "boot_command": [
+        "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ks.cfg<enter><wait>"
+      ],
+      "boot_wait": "12s",
+      "disk_size": 10140,
+      "guest_os_type": "RedHat_64",
+      "http_directory": "http",
+      "iso_checksum": "08961a5cb32d2cdf72026bec43876b7f",
+      "iso_checksum_type": "md5",
+      "iso_url": "iso/rhel-server-7.0-x86_64-dvd.iso",
+      "ssh_username": "vagrant",
+      "ssh_password": "vagrant",
+      "ssh_port": 22,
+      "ssh_wait_timeout": "20m",
+      "shutdown_command": "echo 'shutdown -P now' > shutdown.sh; echo 'vagrant'|sudo -S sh 'shutdown.sh'",
+      "guest_additions_path": "iso/VBoxGuestAdditions_{{.Version}}.iso",
+      "virtualbox_version_file": ".vbox_version",
+      "vboxmanage": [
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--memory",
+          "4096"
+        ],
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--cpus",
+          "2"
+        ]
+      ]
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "scripts": [
+        "scripts/rhcp.sh",
+        "scripts/setup.sh",
+        "scripts/virtualbox-guest-additions.sh",
+        "scripts/vagrant.sh",
+        "scripts/compact.sh"
+      ],
+      "execute_command": "echo 'vagrant'|sudo -S sh '{{.Path}}'"
+    }
+  ],
+  "post-processors": [
+    {
+     "type": "vagrant",
+     "output": "rhel-7.0-x64_virtualbox.box"
+    }
+  ]
+}
