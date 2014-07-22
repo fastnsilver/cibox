@@ -19,7 +19,7 @@ As of 2014-07-16, VirtualBox 4.3.14 is known to [fail](https://forums.virtualbox
 * Download and install [VirtualBox Extensions](http://download.virtualbox.org/virtualbox/4.3.12/Oracle_VM_VirtualBox_Extension_Pack-4.3.12-93733.vbox-extpack)
 * Download patch for [VirtualBox Guest Additions](https://www.virtualbox.org/download/testcase/VBoxGuestAdditions_4.3.13-94832.iso)
     * Rename this file to `VBoxGuestAdditions.iso`
-    * Replace the copy of VBoxGuestAdditions.iso in C:\Program Files\Oracle\VirtualBox with the one your downloaded
+    * Replace the copy of `VBoxGuestAdditions.iso` in `C:\Program Files\Oracle\VirtualBox` with the one you downloaded
 
 
 ## Quickstarts
