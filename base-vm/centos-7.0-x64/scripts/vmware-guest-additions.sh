@@ -1,7 +1,5 @@
 #!/bin/bash
 
-trap 'exit' ERR
-
 # Make sure perl is available
 yum -y install perl
 

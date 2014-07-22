@@ -8,10 +8,12 @@ date > /etc/vagrant_box_build_time
 # Vagrant user
 ################################################################################
 VAGRANT_HOME=/home/vagrant
-mkdir -p $VAGRANT_HOME/.ssh
-chmod 0700 $VAGRANT_HOME/.ssh
+install -v -o vagrant -g vagrant -m 0700 -d $VAGRANT_HOME/.ssh
+curl -o $VAGRANT_HOME/.ssh/authorized_keys -kL 'https://raw.github.com/mitchellh/vagrant/master/keys/vagrant.pub'
+chown vagrant:vagrant $VAGRANT_HOME/.ssh/authorized_keys
+chmod 600 $VAGRANT_HOME/.ssh/authorized_keys
 
-wget --no-check-certificate -O $VAGRANT_HOME/.ssh/authorized_keys 'https://raw.github.com/mitchellh/vagrant/master/keys/vagrant.pub'
-chmod 0600 $VAGRANT_HOME/.ssh/authorized_keys
-
-chown -R vagrant:vagrant $VAGRANT_HOME/.ssh
+cat <<'EOF' > $VAGRANT_HOME/.bash_profile
+[ -f ~/.bashrc ] && . ~/.bashrc
+export PATH=$PATH:/sbin:/usr/sbin:$HOME/bin
+EOF

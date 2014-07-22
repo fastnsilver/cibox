@@ -38,6 +38,7 @@
   "post-processors": [
     {
      "type": "vagrant",
+     "compression_level": 9,
      "output": "centos-7.0-x64_vmware.box"
     }
   ]
