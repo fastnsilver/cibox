@@ -3,8 +3,6 @@
 "CI in a Box" has a few requirements that must be met before you're able to use it. The following software should be installed and configured:
 
 * Git >= v1.9.4
-* Ruby >= v1.9.3
-* Ruby devkit >= v1.9.3
 * Vagrant >= v1.6.3
 * VirtualBox >= v4.3.12
 * Packer >= v0.6.1
@@ -20,9 +18,8 @@ As of 2014-07-16, VirtualBox 4.3.14 is known to [fail](https://forums.virtualbox
 * Download and install [VirtualBox 4.3.12](http://download.virtualbox.org/virtualbox/4.3.12/VirtualBox-4.3.12-93733-Win.exe)
 * Download and install [VirtualBox Extensions](http://download.virtualbox.org/virtualbox/4.3.12/Oracle_VM_VirtualBox_Extension_Pack-4.3.12-93733.vbox-extpack)
 * Download patch for [VirtualBox Guest Additions](https://www.virtualbox.org/download/testcase/VBoxGuestAdditions_4.3.13-94832.iso)
-    * Rename this file to `VBoxGuestAditions_4.3.12.iso`
-    * Make a directory called `iso` underneath the `base-vm` directory
-    * Move the file you just renamed into the `iso` directory
+    * Rename this file to `VBoxGuestAdditions.iso`
+    * Replace the copy of VBoxGuestAdditions.iso in C:\Program Files\Oracle\VirtualBox with the one your downloaded
 
 
 ## Quickstarts
@@ -56,30 +53,14 @@ Continue installing software packages:
 
     cinst git
     cinst packer
-    cinst ruby1.9
     cinst vagrant
     cinst virtualbox
-
-Continue installing Ruby DevKit: 
-
-* Download [Ruby DevKit](https://github.com/downloads/oneclick/rubyinstaller/DevKit-tdm-32-4.5.2-20111229-1559-sfx.exe).  
-* Extract it into new sub-directory named `devkit` underneath the directory where you installed Ruby.
-    * In this case it will be in %ChocolateyInstall%/packages/ruby19x
-* Open cmd shell. 
-* Change directories into the devkit folder. 
-* Execute `dk.rb init`
-* Execute `dk.rb install`
-
-Continue installing Ruby gems:
-
-    gem install bundler
-
 
 Verify your Windows `Path` by opening a `cmd.exe` shell and typing: 
 
     set | grep Path
     
-the `bin` directories for `git`, `ruby`, `packer`, `vagrant`, and `virtualbox` should be included in your `Path`
+the `bin` directories for `git`, `packer`, `vagrant`, and `virtualbox` should be included in your `Path`
 
 
 ## Verification
@@ -87,7 +68,6 @@ the `bin` directories for `git`, `ruby`, `packer`, `vagrant`, and `virtualbox` s
 For each software package installed, open a shell and type 
 
 * Git `git --version`
-* Ruby `ruby -v`
 * Vagrant `vagrant -v`
 * VirtualBox `VBoxManage`
 * Packer `packer --version`
