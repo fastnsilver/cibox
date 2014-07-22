@@ -5,6 +5,7 @@
       "boot_command": [
         "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ks.cfg<enter><wait>"
       ],
+      "headless" : true,
       "boot_wait": "12s",
       "disk_size": 10140,
       "guest_os_type": "RedHat_64",
