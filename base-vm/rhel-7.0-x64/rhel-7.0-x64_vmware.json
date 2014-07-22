@@ -6,7 +6,7 @@
         "<esc>",
         "<wait>linux ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ks.cfg<enter>"
       ],
-      "headless" : true,
+      "headless" : false,
       "boot_wait": "12s",
       "disk_size": 10140,
       "guest_os_type": "linux",
@@ -25,16 +25,20 @@
     }
   ],
   "provisioners": [
+  	{
+  		"type": "file",
+  		"source": "scripts/rhcp.properties",
+  		"destination": "/home/vagrant/rhcp.properties"
+	},
     {
+      "execute_command": "echo 'vagrant'|{{.Vars}} sudo -E -S sh '{{.Path}}'",
       "type": "shell",
       "scripts": [
-        "scripts/rhcp.sh",
         "scripts/setup.sh",
         "scripts/vmware-guest-additions.sh",
         "scripts/vagrant.sh",
         "scripts/compact.sh"
-      ],
-      "execute_command": "echo 'vagrant'|{{.Vars}} sudo -E -S sh '{{.Path}}'"
+      ] 
     }
   ],
   "post-processors": [

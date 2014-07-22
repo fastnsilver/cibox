@@ -20,11 +20,10 @@ AutoPartition.app
 .rbenv-gemsets
 .project
 .ruby-version
-**/rhcp.sh
+**/rhcp.properties
 *.vmdk
 *.ovf
 .idea
 *.iml
 target
 packer_cache
-.vagrant
