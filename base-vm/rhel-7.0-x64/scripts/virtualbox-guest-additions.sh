@@ -12,4 +12,4 @@ mount -o loop $VAGRANT_HOME/VBoxGuestAdditions.iso /mnt/VBoxGuestAdditions
 yes | sh /mnt/VBoxGuestAdditions/VBoxLinuxAdditions.run || true
 
 # Unmount
-umount /mnt
+umount /mnt/VBoxGuestAdditions
