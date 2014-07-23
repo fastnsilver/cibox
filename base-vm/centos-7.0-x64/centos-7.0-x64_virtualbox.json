@@ -53,7 +53,8 @@
     {
      "type": "vagrant",
      "compression_level": 9,
-     "output": "centos-7.0-x64_virtualbox.box"
+     "output": "centos-7.0-x64_virtualbox.box",
+     "keep_input_artifact": true
     }
   ]
 }
