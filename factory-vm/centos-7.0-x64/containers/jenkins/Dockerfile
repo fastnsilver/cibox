@@ -1,4 +1,13 @@
-# Install Jenkins
+################################################################################
+#
+# Jenkins
+#
+#    docker build -rm=true -t fans/jenkins .
+#    CONTAINER=$(docker run -d -p 2000:22 -p 8080:8080 -t fans/jenkins)
+#    ssh -X -l fans -p 2000 localhost
+#
+################################################################################
+
 
 FROM        fans/oracle7jdk:latest
 MAINTAINER  Chris Phillipson <fastnsilver@gmail.com>
@@ -16,10 +25,6 @@ RUN		rpm --import http://pkg.jenkins-ci.org/redhat/jenkins-ci.org.key
 # Installs latest available Jenkins
 RUN		yum -y install jenkins
 
-# Start Jenkins automatically on OS startup
-RUN 	systemctl enable jenkins.service
+EXPOSE 	8080
 
-EXPOSE 8080
-
-# Start Jenkins
-CMD	["service jenkins start"]
+ADD     etc/supervisor/conf.d/jenkins.conf /etc/supervisor/conf.d/jenkins.conf

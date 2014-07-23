@@ -13,8 +13,8 @@ chown vagrant:vagrant $VAGRANT_HOME/epel-release-7-0.2.noarch.rpm
 yum -y install epel-release-7-0.2.noarch.rpm
 
 
-# Install Git
-yum -y install curl-devel expat-devel gettext-devel openssl openssl-devel zlib-devel
+# Get and install Git
+yum install -y bzip2 curl gcc "kernel-devel-$(uname -r)" kernel-devel kernel-headers wget net-tools sudo
 wget https://www.kernel.org/pub/software/scm/git/git-$GIT_VERSION.tar.gz
 chown vagrant:vagrant $VAGRANT_HOME/git-$GIT_VERSION.tar.gz
 tar xzf git-$GIT_VERSION.tar.gz

@@ -17,17 +17,13 @@ subscription-manager repos --enable rhel-7-server-optional-rpms
 subscription-manager repos --enable rhel-7-server-extras-rpms
 subscription-manager repos --enable rhel-7-server-thirdparty-oracle-java-rpms
 
-yum update -y
-yum install -y bzip2 curl gcc "kernel-devel-$(uname -r)" kernel-headers wget
-yum install -y net-tools
-yum groupinstall -y "Development Tools" "X Window System"
 
 # sudo
-yum install -y sudo
-=======
 yum install -y bzip2 curl gcc "kernel-devel-$(uname -r)" kernel-devel kernel-headers wget net-tools sudo
 yum groupinstall -y "Development Tools" "X Window System"
-echo "vagrant ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers.d/vagrant
+
+
+
 
 # Get and install EPEL
 wget http://mirrors.mit.edu/epel/beta/7/x86_64/epel-release-7-0.2.noarch.rpm
@@ -77,4 +73,3 @@ systemctl disable mdmonitor.service
 # systemctl disable rpcgssd.service 
 # systemctl disable rpcidmapd.service 
 systemctl disable yum-updateonboot.service 
-

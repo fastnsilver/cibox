@@ -1,6 +1,6 @@
 ################################################################################
 #
-# Go Server
+# Go Agent
 #
 #    docker build -rm=true -t fans/go-agent .
 #    CONTAINER=$(docker run -d -p 8154:8154 -t fans/go-agent)
