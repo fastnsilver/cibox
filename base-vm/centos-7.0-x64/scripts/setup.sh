@@ -6,15 +6,14 @@ trap 'exit' ERR
 VAGRANT_HOME=/home/vagrant
 GIT_VERSION=2.0.2
 
-
 # Get and install EPEL
-wget http://mirrors.mit.edu/epel/beta/7/x86_64/epel-release-7-0.2.noarch.rpm
+wget --retry-connrefused http://mirrors.mit.edu/epel/beta/7/x86_64/epel-release-7-0.2.noarch.rpm
 chown vagrant:vagrant $VAGRANT_HOME/epel-release-7-0.2.noarch.rpm
 yum -y install epel-release-7-0.2.noarch.rpm
 
-
 # Get and install Git
-yum install -y bzip2 curl gcc "kernel-devel-$(uname -r)" kernel-devel kernel-headers wget net-tools sudo
+yum install -y curl gcc "kernel-devel-$(uname -r)" kernel-devel kernel-headers \
+	curl-devel expat-devel gettext-devel openssl-devel zlib-devel perl-ExtUtils-MakeMaker
 wget https://www.kernel.org/pub/software/scm/git/git-$GIT_VERSION.tar.gz
 chown vagrant:vagrant $VAGRANT_HOME/git-$GIT_VERSION.tar.gz
 tar xzf git-$GIT_VERSION.tar.gz
@@ -33,6 +32,8 @@ systemctl start docker.service
 systemctl status docker.service
 usermod -a -G docker vagrant
 
-
 # Pull Centos 7 container
 docker pull centos:centos7
+
+# Clean up
+yum clean all

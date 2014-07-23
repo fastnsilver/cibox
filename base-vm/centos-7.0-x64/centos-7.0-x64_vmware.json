@@ -33,7 +33,7 @@
         "scripts/vmware-guest-additions.sh",
         "scripts/vagrant.sh",
         "scripts/compact.sh"
-      ],
+      ]
     }
   ],
   "post-processors": [
