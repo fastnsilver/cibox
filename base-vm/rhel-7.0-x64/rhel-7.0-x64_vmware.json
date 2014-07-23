@@ -17,6 +17,7 @@
       "ssh_username": "vagrant",
       "ssh_password": "vagrant",
       "ssh_wait_timeout": "20m",
+      "tools_upload_flavor":"linux",
       "shutdown_command": "echo 'shutdown -P now' > shutdown.sh; echo 'vagrant'|sudo -S sh 'shutdown.sh'",
       "vmx_data": {
         "memsize": "4096",
@@ -41,7 +42,6 @@
       "type": "shell",
       "scripts": [
         "scripts/setup.sh",
-        "scripts/vmware-guest-additions.sh",
         "scripts/vagrant.sh",
         "scripts/compact.sh"
       ] 
@@ -51,7 +51,8 @@
     {
      "type": "vagrant",
      "compression_level": 9,
-     "output": "rhel-7.0-x64_vmware.box"
+     "output": "rhel-7.0-x64_vmware.box",
+     "keep_input_artifact": true
     }
   ]
 }
