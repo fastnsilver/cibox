@@ -14,27 +14,27 @@ GIT_VERSION=2.0.1
 subscription-manager register --username $username --password $password --auto-attach
 
 yum update -y
-yum install -y bzip2 curl gcc kernel-devel kernel-headers avahi bluez-utils dogtail kudzu ipw2100-firmware ipw2200-firmware ivtv-firmware wget
+yum install -y bzip2 curl gcc "kernel-devel-$(uname -r)" kernel-headers wget
 yum install -y net-tools
 yum groupinstall -y "Development Tools" "X Window System"
 
 # disable unnecessary services
-chkconfig acpid off
-chkconfig auditd off
-chkconfig blk-availability off
-chkconfig bluetooth off
-chkconfig certmonger off
-chkconfig cpuspeed off
-chkconfig cups off
-chkconfig haldaemon off
-chkconfig ip6tables off
-chkconfig lvm2-monitor off
-chkconfig messagebus off
-chkconfig mdmonitor off
-chkconfig rpcbind off
-chkconfig rpcgssd off
-chkconfig rpcidmapd off
-chkconfig yum-updateonboot off
+systemctl disable acpid.service
+systemctl disable auditd.service
+systemctl disable blk-availability.service
+systemctl disable bluetooth.service
+systemctl disable certmonger.service
+systemctl disable cpuspeed.service
+systemctl disable cups.service
+systemctl disable haldaemon.service
+systemctl disable ip6tables.service
+systemctl disable lvm2-monitor.service
+systemctl disable messagebus.service
+systemctl disable mdmonitor.service
+systemctl disable rpcbind.service
+systemctl disable rpcgssd.service
+systemctl disable rpcidmapd.service
+systemctl disable yum-updateonboot.service
 
 # sudo
 yum install -y sudo
@@ -49,7 +49,7 @@ yum -y install epel-release-7-0.2.noarch.rpm
 # Install Git
 yum -y install curl-devel expat-devel gettext-devel perl-ExtUtils-MakeMaker
 wget https://www.kernel.org/pub/software/scm/git/git-$GIT_VERSION.tar.gz
-chown vagrant:vagrant $VAGRANT_HOME/git-$VERSION.tar.gz
+chown vagrant:vagrant $VAGRANT_HOME/git-$GIT_VERSION.tar.gz
 tar xzf git-$GIT_VERSION.tar.gz
 cd git-$GIT_VERSION
 make prefix=/usr/local/git all

@@ -45,14 +45,6 @@ parse_url() {
   [ -n "$query" ] && eval "export ${prefix}_QUERY=\"$query\"" || rc=$?
 }
 
-download_mysql_driver() {
-  local driver="mysql-connector-java-5.1.30"
-  if [ ! -f "$1/$driver-bin.jar" ]; then
-    echo "Downloading MySQL JDBC Driver..."
-    curl -L http://dev.mysql.com/get/Downloads/Connector-J/$driver.tar.gz | tar zxv -C /tmp
-    cp /tmp/$driver/$driver-bin.jar $1/$driver-bin.jar
-  fi
-}
 
 read_var() {
   eval "echo \$$1_$2"
@@ -61,7 +53,6 @@ read_var() {
 extract_database_url() {
   local url="$1"
   local prefix="$2"
-  local mysql_install="$3"
 
   eval "unset ${prefix}_PORT"
   parse_url "$url" $prefix
@@ -75,17 +66,6 @@ extract_database_url() {
       local jdbc_url="jdbc:postgresql://$host_port_name"
       local hibernate_dialect="org.hibernate.dialect.PostgreSQLDialect"
       local database_type="postgres72"
-      ;;
-    mysql|mysql2)
-      download_mysql_driver "$mysql_install"
-      if [ -z "$(read_var $prefix PORT)" ]; then
-        eval "${prefix}_PORT=3306"
-      fi
-      local host_port_name="$(read_var $prefix HOST):$(read_var $prefix PORT)/$(read_var $prefix NAME)"
-      local jdbc_driver="com.mysql.jdbc.Driver"
-      local jdbc_url="jdbc:mysql://$host_port_name?autoReconnect=true&characterEncoding=utf8&useUnicode=true&sessionVariables=storage_engine%3DInnoDB"
-      local hibernate_dialect="org.hibernate.dialect.MySQLDialect"
-      local database_type="mysql"
       ;;
     *)
       echo "Unsupported database url scheme: $(read_var $prefix SCHEME)"

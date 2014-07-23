@@ -1,6 +1,6 @@
 # Basics
 #
-FROM fans/factory-base
+FROM fans/atlassian:latest
 MAINTAINER Chris Phillipson <fastnsilver@gmail.com>
 
 # Install Stash

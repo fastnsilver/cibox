@@ -1,21 +1,12 @@
-# Basics
-#
-FROM centos:centos7
+
+FROM fans/postgresql94:latest
 MAINTAINER Chris Phillipson <fastnsilver@gmail.com>
+
 RUN yum -y update
 RUN yum -y install bzip2 tar wget
 RUN wget http://apt.sw.be/redhat/el6/en/x86_64/rpmforge/RPMS/xmlstarlet-1.5.0-1.el6.rf.x86_64.rpm
 RUN yum -y localinstall xmlstarlet-1.5.0-1.el6.rf.x86_64.rpm
 
-# Configure YUM to exclude postgres in favor of local installation
-RUN sed "/\[base\]/a\exclude=postgresql*" /etc/yum.repos.d/CentOS-Base.repo
-RUN sed "/\[updates\]/a\exclude=postgresql*" /etc/yum.repos.d/CentOS-Base.repo
-
-# Install PGDG RPM file 
-RUN yum -y localinstall http://yum.postgresql.org/9.4/redhat/rhel-7-x86_64/pgdg-centos94-9.4-1.noarch.rpm
-
-# Install PostgreSQL 
-RUN yum -y install postgresql94-server
 
 # Setup volume handling
 RUN /usr/sbin/groupadd atlassian
@@ -27,7 +18,3 @@ RUN mkdir -p /opt/atlassian-home
 ADD common.bash /usr/local/share/atlassian/common.bash
 RUN chgrp atlassian /usr/local/share/atlassian/common.bash
 RUN chmod g+w /usr/local/share/atlassian/common.bash
-
-EXPOSE 5432
-
-CMD ["/launch"]
