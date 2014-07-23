@@ -18,18 +18,12 @@ If you choose to build a Red Hat Enterprise Linux version of the `base-vm` you w
 
 Change directories to appropriate `rhel` prefixed `scripts` sub-folder
 
-Edit and save the following as `rhcp.sh`
+Edit and save the following as `rhcp.properties`
 
-    # Create .properties file that will encapsulate Red Hat Customer Portal credentials
-    # File will be used by base.sh to register RHEL 7 and add repos via subscription-manager
-    VAGRANT_HOME=/home/vagrant
-    cat > $VAGRANT_HOME/rhcp.properties << EOM
+    # Red Hat Customer Portal credentials
+    # Used to register RHEL 7 and add repos via subscription-manager
     username=<rhcp_username>
     password=<rhcp_password>
-    EOM
-
-    # Bestow permissions 
-    chown vagrant:vagrant $VAGRANT_HOME/rhcp.properties
 
 Above substitute valid Red Hat Customer Portal account credentials for
 
