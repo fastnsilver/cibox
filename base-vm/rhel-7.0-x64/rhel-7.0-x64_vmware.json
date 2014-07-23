@@ -29,7 +29,12 @@
   		"type": "file",
   		"source": "scripts/rhcp.properties",
   		"destination": "/home/vagrant/rhcp.properties"
-	},
+	  },
+    {
+      "type": "file",
+      "source": "container/rhel-server-docker-7.0.21.4-x86_64.tar.gz",
+      "destination": "/home/vagrant/rhel-server-docker-7.0.21.4-x86_64.tar.gz"
+    },
     {
       "execute_command": "echo 'vagrant'|{{.Vars}} sudo -E -S sh '{{.Path}}'",
       "type": "shell",

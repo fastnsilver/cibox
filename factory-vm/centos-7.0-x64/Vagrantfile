@@ -12,35 +12,6 @@ $install_script = <<SCRIPT
   yum upgrade -y
 
 
-  ##############################################################################
-  # Install debootstrap for building Docker base containers
-  ##############################################################################
-
-  yum install -y debootstrap
-
-
-  ##############################################################################
-  # Install Docker
-  ##############################################################################
-
-  # Install docker
-  yum install -y docker-io
-
-  # Make docker start up on boot
-  systemctl enable docker.service
-
-  echo -e 'DOCKER_OPTS="-H tcp://0.0.0.0:4243 -H unix:///var/run/docker.sock"\n' > /etc/default/docker
-  
-  # Start docker
-  systemctl start docker.service
-
-  # Status
-  systemctl status docker.service
-
-  # Add user to the docker group
-  usermod -a -G docker vagrant
-
-
   RUBY_VERSION=2.1.2
   ##############################################################################
   # Install Ruby $RUBY_VERSION for development
