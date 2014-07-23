@@ -6,7 +6,7 @@
         "<esc>",
         "<wait>linux ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ks.cfg<enter>"
       ],
-      "headless" : false,
+      "headless" : true,
       "boot_wait": "12s",
       "disk_size": 10140,
       "guest_os_type": "linux",
@@ -17,6 +17,7 @@
       "ssh_username": "vagrant",
       "ssh_password": "vagrant",
       "ssh_wait_timeout": "20m",
+      "shutdown_command": "echo 'shutdown -P now' > shutdown.sh; echo 'vagrant'|sudo -S sh 'shutdown.sh'",
       "vmx_data": {
         "memsize": "4096",
         "numvcpus": "4",
@@ -32,8 +33,8 @@
 	  },
     {
       "type": "file",
-      "source": "container/rhel-server-docker-7.0.21.4-x86_64.tar.gz",
-      "destination": "/home/vagrant/rhel-server-docker-7.0.21.4-x86_64.tar.gz"
+      "source": "container/rhel-server-docker-7.0-21.4-x86_64.tar.gz",
+      "destination": "/home/vagrant/rhel-server-docker-7.0-21.4-x86_64.tar.gz"
     },
     {
       "execute_command": "echo 'vagrant'|{{.Vars}} sudo -E -S sh '{{.Path}}'",
