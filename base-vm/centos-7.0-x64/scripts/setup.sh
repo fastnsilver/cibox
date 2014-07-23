@@ -4,7 +4,7 @@ trap 'exit' ERR
 
 # Set local variables
 VAGRANT_HOME=/home/vagrant
-GIT_VERSION=2.0.1
+GIT_VERSION=2.0.2
 
 
 # Get and install EPEL
@@ -14,9 +14,9 @@ yum -y install epel-release-7-0.2.noarch.rpm
 
 
 # Install Git
-yum -y install curl-devel expat-devel gettext-devel perl-ExtUtils-MakeMaker
+yum -y install curl-devel expat-devel gettext-devel openssl openssl-devel zlib-devel
 wget https://www.kernel.org/pub/software/scm/git/git-$GIT_VERSION.tar.gz
-chown vagrant:vagrant $VAGRANT_HOME/git-$VERSION.tar.gz
+chown vagrant:vagrant $VAGRANT_HOME/git-$GIT_VERSION.tar.gz
 tar xzf git-$GIT_VERSION.tar.gz
 cd git-$GIT_VERSION
 make prefix=/usr/local/git all

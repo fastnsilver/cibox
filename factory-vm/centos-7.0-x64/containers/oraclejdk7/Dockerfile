@@ -8,7 +8,7 @@
 #
 ################################################################################
 
-FROM        fans/base:latest
+FROM        fans/supervisord:latest
 MAINTAINER  Chris Phillipson <fastnsilver@gmail.com>
 
 # Install Oracle JDK 7
