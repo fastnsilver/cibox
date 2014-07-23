@@ -22,5 +22,3 @@ RUN		yum --nogpgcheck -y localinstall go-server-$GO_SERVER_VERSION.noarch.rpm
 RUN 	rm -f go-server-$GO_SERVER_VERSION.noarch.rpm
 
 EXPOSE 8153 8154
-
-CMD /etc/init.d/go-server start && tail -f /var/log/go-server/go-server.log

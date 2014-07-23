@@ -3,7 +3,7 @@
 # Go Agent
 #
 #    docker build -rm=true -t fans/go-agent .
-#    CONTAINER=$(docker run -d -p 8154:8154 -t fans/go-agent)
+#    CONTAINER=$(docker run -d -p 8154:8154 -t fans/go-agent -e SERVER_PORT_8153_TCP_ADDR=localhost -e SERVER_PORT_8153_TCP_PORT=8153)
 #    ssh -X -l go-agent -p 8154 localhost
 #
 ################################################################################
@@ -24,5 +24,3 @@ RUN 	rm -f go-agent-$GO_AGENT_VERSION.noarch.rpm
 RUN 	sed -r -i "s/^(GO_SERVER)=(.*)/\1=\$SERVER_PORT_8153_TCP_ADDR/g" /etc/default/go-agent
 
 VOLUME 	["/var/lib/go-agent"]
-
-CMD 	/usr/java/default/bin/java -jar /usr/share/go-agent/agent-bootstrapper.jar $SERVER_PORT_8153_TCP_ADDR $SERVER_PORT_8153_TCP_PORT

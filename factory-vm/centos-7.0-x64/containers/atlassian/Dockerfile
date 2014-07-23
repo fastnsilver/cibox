@@ -18,3 +18,7 @@ RUN mkdir -p /opt/atlassian-home
 ADD common.bash /usr/local/share/atlassian/common.bash
 RUN chgrp atlassian /usr/local/share/atlassian/common.bash
 RUN chmod g+w /usr/local/share/atlassian/common.bash
+
+ADD initialise_db.sh /usr/local/share/atlassian/initialise_db.sh
+RUN chgrp atlassian /usr/local/share/atlassian/initialise_db.sh
+RUN chmod g+w /usr/local/share/atlassian/initialise_db.sh

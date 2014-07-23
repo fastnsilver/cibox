@@ -20,6 +20,5 @@ ADD launch.bash /launch
 
 WORKDIR /opt/stash
 VOLUME /opt/atlassian-home
+
 EXPOSE 7990
-USER stash
-CMD ["/launch"]
