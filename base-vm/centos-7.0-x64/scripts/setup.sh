@@ -23,11 +23,7 @@ make prefix=/usr/local/git all
 make prefix=/usr/local/git install
 echo "export PATH=/usr/local/git/bin:$PATH" >> /etc/bashrc
 source /etc/bashrc
-
-
-# Install debootstrap (for building Docker base containers)
-yum install -y debootstrap
-
+rm -rf $VAGRANT_HOME/git-$GIT_VERSION*
 
 # Install docker
 yum install -y docker-io
