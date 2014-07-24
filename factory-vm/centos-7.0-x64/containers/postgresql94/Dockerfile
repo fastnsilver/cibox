@@ -26,7 +26,4 @@ RUN echo "listen_addresses='*'" >> /var/lib/pgsql/data/postgresql.conf
 # Expose the PostgreSQL port
 EXPOSE 5432
 
-# Add VOLUMEs to allow backup of config, logs and databases
-VOLUME  ["/etc/pgsql", "/var/log/pgsql", "/var/lib/pgsql"]
-
 ADD     etc/supervisor/conf.d/postgresql94.conf /etc/supervisor/conf.d/postrgresql94.conf

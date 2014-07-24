@@ -2,6 +2,8 @@
 FROM fans/postgresql94:latest
 MAINTAINER Chris Phillipson <fastnsilver@gmail.com>
 
+ENV PGDATA /var/lib/pgdata
+
 RUN yum -y update
 RUN yum -y install bzip2 tar wget
 RUN wget http://apt.sw.be/redhat/el6/en/x86_64/rpmforge/RPMS/xmlstarlet-1.5.0-1.el6.rf.x86_64.rpm
