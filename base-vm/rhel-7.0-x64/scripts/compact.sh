@@ -15,6 +15,8 @@ rm -rf /etc/yum.repos.d/{epel}.repo
 rm -rf /usr/src/vboxguest* /usr/src/virtualbox-ose-guest*
 rm -rf *.iso *.iso.? /tmp/vbox /home/vagrant/.vbox_version
 
+# TODO Remove VMWare specific files
+
 # Cleanup log files
 find /var/log -type f | while read f; do echo -ne '' > $f; done;
 
@@ -23,6 +25,11 @@ rm -rf /tmp/*
 
 # Remove traces of MAC address from network configuration
 rm -f /etc/udev/rules.d/70-persistent-net.rules
+if [ -r /etc/sysconfig/network-scripts/ifcfg-eth0 ]; then
+  sed -i '/^UUID/d/' /etc/sysconfig/network-scripts/ifcfg-eth0
+  sed -i '/^HWADDR/d/' /etc/sysconfig/network-scripts/ifcfg-eth0
+fi
+
 if [ -f /etc/sysconfig/network-scripts/ifcfg-enp0s3 ]; then
 	sed -i '/^UUID/d' /etc/sysconfig/network-scripts/ifcfg-enp0s3
 	sed -i '/^HWADDR/d' /etc/sysconfig/network-scripts/ifcfg-enp0s3

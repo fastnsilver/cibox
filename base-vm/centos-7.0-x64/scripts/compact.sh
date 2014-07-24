@@ -23,6 +23,11 @@ rm -rf /tmp/*
 
 # Remove traces of MAC address from network configuration
 rm -f /etc/udev/rules.d/70-persistent-net.rules
+if [ -r /etc/sysconfig/network-scripts/ifcfg-eth0 ]; then
+  sed -i '/^UUID/d/' /etc/sysconfig/network-scripts/ifcfg-eth0
+  sed -i '/^HWADDR/d/' /etc/sysconfig/network-scripts/ifcfg-eth0
+fi
+
 if [ -f /etc/sysconfig/network-scripts/ifcfg-enp0s3 ]; then
 	sed -i '/^UUID/d' /etc/sysconfig/network-scripts/ifcfg-enp0s3
 	sed -i '/^HWADDR/d' /etc/sysconfig/network-scripts/ifcfg-enp0s3
