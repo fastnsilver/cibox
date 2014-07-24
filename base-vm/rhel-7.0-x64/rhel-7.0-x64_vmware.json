@@ -43,6 +43,7 @@
       "scripts": [
         "scripts/setup.sh",
         "scripts/vagrant.sh",
+        "scripts/vmware-guest-additions.sh",
         "scripts/compact.sh"
       ] 
     }
