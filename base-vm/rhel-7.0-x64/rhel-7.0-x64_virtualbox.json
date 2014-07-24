@@ -64,7 +64,8 @@
     {
      "type": "vagrant",
      "compression_level": 9,
-     "output": "rhel-7.0-x64_virtualbox.box"
+     "output": "rhel-7.0-x64_virtualbox.box",
+     "keep_input_artifact": true
     }
   ]
 }

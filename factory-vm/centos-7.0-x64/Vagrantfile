@@ -33,7 +33,7 @@ SCRIPT
 
 
 Vagrant.configure("2") do |config|
-
+  config.vm.box = ENV['TEMPLATE']
   config.vm.hostname = "factory"
 
   config.ssh.forward_agent = true
@@ -41,25 +41,6 @@ Vagrant.configure("2") do |config|
 
   config.vm.provision "shell" do |s|
     s.inline = $install_script
-  end
-
-  config.vm.provider :virtualbox do |vbox|
-    vbox.vm.box = "centos-7.0-x64_virtualbox"
-    vbox.vm.box_url = "../../base-vm/centos-7.0-x64/centos-7.0-x64_virtualbox.box"
-    vbox.memory = 6144
-  end
-
-  config.vm.provider :vmware_fusion do |vmwf|
-  	
-    vmwf.vm.box = "centos-7.0-x64_vmware"
-    vmwf.vm.box_url = "../../base-vm/centos-7.0-x64/centos-7.0-x64_vmware.box"
-    vmwf.vmx["memsize"] = "6144"
-  end
-
-  config.vm.provider :vmware_workstation do |vmww|
-    vmww.vm.box = "centos-7.0-x64_vmware"
-    vmww.vm.box_url = "../../base-vm/centos-7.0-x64/centos-7.0-x64_vmware.box"
-    vmww.vmx["memsize"] = "6144"
   end
 
   # Synced folders
