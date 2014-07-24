@@ -24,3 +24,5 @@ RUN 	rm -f go-agent-$GO_AGENT_VERSION.noarch.rpm
 RUN 	sed -r -i "s/^(GO_SERVER)=(.*)/\1=\$SERVER_PORT_8153_TCP_ADDR/g" /etc/default/go-agent
 
 VOLUME 	["/var/lib/go-agent"]
+
+ADD     etc/supervisor/conf.d/go-agent.conf /etc/supervisor/conf.d/go-agent.conf

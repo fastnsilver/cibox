@@ -22,3 +22,5 @@ RUN		yum --nogpgcheck -y localinstall go-server-$GO_SERVER_VERSION.noarch.rpm
 RUN 	rm -f go-server-$GO_SERVER_VERSION.noarch.rpm
 
 EXPOSE 8153 8154
+
+ADD     etc/supervisor/conf.d/go-server.conf /etc/supervisor/conf.d/go-server.conf

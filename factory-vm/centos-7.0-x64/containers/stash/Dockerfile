@@ -22,3 +22,5 @@ WORKDIR /opt/stash
 VOLUME /opt/atlassian-home
 
 EXPOSE 7990
+
+ADD     etc/supervisor/conf.d/stash.conf /etc/supervisor/conf.d/stash.conf

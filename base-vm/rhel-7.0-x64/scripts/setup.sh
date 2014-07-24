@@ -46,9 +46,14 @@ echo -e 'DOCKER_OPTS="-H tcp://0.0.0.0:4243 -H unix:///var/run/docker.sock"\n' >
 systemctl start docker.service
 systemctl status docker.service
 usermod -a -G docker vagrant
+
 # Import Red Hat 7 container
 # @see https://docs.docker.com/reference/commandline/cli/#import
 cat $VAGRANT_HOME/rhel-server-docker-7.0-21.4-x86_64.tar.gz | docker import - rhel:rhel7
+
+# Install appliance-tools. 
+# Appliance tools is one method that can be used for creating a VM that can be packaged into a docker container.
+yum install -y appliance-tools libguestfs-tools
 
 # Clean up
 yum clean all
