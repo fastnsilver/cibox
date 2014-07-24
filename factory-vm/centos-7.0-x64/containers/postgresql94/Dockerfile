@@ -32,3 +32,5 @@ EXPOSE 5432
 
 # Add VOLUMEs to allow backup of config, logs and databases
 VOLUME  ["/etc/postgresql", "/var/log/postgresql", "/var/lib/postgresql"]
+
+ADD     etc/supervisor/conf.d/postgresql94.conf /etc/supervisor/conf.d/postrgresql94.conf

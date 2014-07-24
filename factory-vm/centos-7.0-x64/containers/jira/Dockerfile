@@ -23,3 +23,5 @@ WORKDIR /opt/jira
 VOLUME ["/opt/atlassian-home"]
 
 EXPOSE 9080
+
+ADD     etc/supervisor/conf.d/jira.conf /etc/supervisor/conf.d/jira.conf

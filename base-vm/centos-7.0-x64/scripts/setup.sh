@@ -35,5 +35,9 @@ usermod -a -G docker vagrant
 # Pull Centos 7 container
 docker pull centos:centos7
 
+# Install appliance-tools. 
+# Appliance tools is one method that can be used for creating a VM that can be packaged into a docker container.
+yum install -y appliance-tools libguestfs-tools
+
 # Clean up
 yum clean all
