@@ -3,7 +3,7 @@
 FROM centos:centos7
 MAINTAINER Chris Phillipson <fastnsilver@gmail.com>
 
-RUN 	yum -y update
+RUN 	yum -d 10 -e 10 -y update
 RUN 	yum install -y openssh-server supervisor
 RUN mkdir -p /var/run/sshd
 RUN mkdir -p /var/log/supervisor
