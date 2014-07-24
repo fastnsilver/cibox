@@ -11,23 +11,8 @@ $install_script = <<SCRIPT
   yum update -y
   yum upgrade -y
 
-
-  RUBY_VERSION=2.1.2
-  ##############################################################################
-  # Install Ruby $RUBY_VERSION for development
-  ##############################################################################
-
-  if [ ! -f /usr/local/rvm/bin/rvm ]; then
-    curl -sSL https://get.rvm.io | sudo bash
-  fi
-  if [ ! -d /usr/local/rvm/rubies/ruby-$RUBY_VERSION ]; then
-    /usr/local/rvm/bin/rvm install ruby-$RUBY_VERSION
-  fi
-  /usr/local/rvm/bin/rvm alias create default ruby-$RUBY_VERSION
-
-  # Add user to the rvm group
-  usermod -a -G rvm vagrant
-
+  DOCKER_OPTS="-H tcp://0.0.0.0:4243 -H unix:///var/run/docker.sock --net=host"
+  systemctl restart docker.service
 
 SCRIPT
 

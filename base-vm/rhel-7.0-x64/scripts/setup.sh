@@ -42,8 +42,7 @@ rm -rf $VAGRANT_HOME/git-$GIT_VERSION*
 # Install Docker and start service
 yum install -y docker-io
 systemctl enable docker.service
-# Networking for all Docker containers is defined by host
-echo -e 'DOCKER_OPTS="-H tcp://0.0.0.0:4243 -H unix:///var/run/docker.sock --net=host"\n' > /etc/default/docker
+echo -e 'DOCKER_OPTS="-H tcp://0.0.0.0:4243 -H unix:///var/run/docker.sock"\n' > /etc/default/docker
 systemctl start docker.service
 systemctl status docker.service
 usermod -a -G docker vagrant
