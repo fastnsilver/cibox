@@ -15,12 +15,11 @@ if "%h%" == "true" (
 )
 if NOT "%d%" == "" if NOT "%p%" == "" (
 	cd %d%
-    set template=%d%_%p%
-    packer --version
-    vagrant version
-    packer inspect %template%.json
-    packer build -force %template%.json
-    vagrant box add --provider=%p% --name="%d%" %template%.box
+  packer --version
+  vagrant version
+  packer inspect %d%_%p%.json
+  packer build -force %d%_%p%.json
+  vagrant box add --provider=%p% --name="%d%" %d%_%p%.box
 )
 GOTO Exit
 

@@ -70,11 +70,10 @@ else
      pushd $SAVEPATH > /dev/null
      cd $SCRIPTPATH
      cd $DISTRO
-     TEMPLATE=${DISTRO}_${PROVIDER}
      packer --version
      vagrant version
-     packer inspect ${TEMPLATE}.json
-     packer build -force ${TEMPLATE}.json
-     vagrant box add --provider=${PROVIDER} --name="$DISTRO" ${TEMPLATE}.box
+     packer inspect ${DISTRO}_${PROVIDER}.json
+     packer build -force ${DISTRO}_${PROVIDER}.json
+     vagrant box add --provider=${PROVIDER} --name="$DISTRO" ${DISTRO}_${PROVIDER}.box
 popd > /dev/null
 fi
