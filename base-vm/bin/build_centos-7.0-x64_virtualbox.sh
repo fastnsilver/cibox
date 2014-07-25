@@ -11,5 +11,6 @@ TEMPLATE=${DISTRO}_virtualbox
 packer --version
 packer inspect ${TEMPLATE}.json
 packer build -force ${TEMPLATE}.json
+vagrant box add --provider=virtualbox --name="$DISTRO" ../../../base-vm/$DISTRO/${DISTRO}_virtualbox.box
 popd > /dev/null
 
