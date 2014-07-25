@@ -1,10 +1,15 @@
-#!/bin/sh
+#!/bin/bash
 
-DIST=centos-7.0-x64
-TEMPLATE=$DIST_virtualbox
-cd ../$DIST
-
+SAVEPATH=`pwd`
+SCRIPTPATH=`dirname $0`
+pushd $SAVEPATH > /dev/null
+cd $SCRIPTPATH
+cd ..
+DISTRO="centos-7.0-x64"
+cd $DISTRO
+TEMPLATE=${DISTRO}_virtualbox
 packer --version
-packer inspect $TEMPLATE.json
-packer validate $TEMPLATE.json
-packer build -force $TEMPLATE.json
+packer inspect ${TEMPLATE}.json
+packer build -force ${TEMPLATE}.json
+popd > /dev/null
+

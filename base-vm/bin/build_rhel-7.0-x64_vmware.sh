@@ -1,10 +1,15 @@
-#!/bin/sh
+#!/bin/bash
 
-DIST=rhel-7.0-x64
-TEMPLATE=$DIST_vmware
-cd ../$DIST
-
+SAVEPATH=`pwd`
+SCRIPTPATH=`dirname $0`
+pushd $SAVEPATH > /dev/null
+cd $SCRIPTPATH
+cd ..
+DISTRO="rhel-7.0-x64"
+cd $DISTRO
+TEMPLATE=${DISTRO}_vmware
 packer --version
-packer inspect $TEMPLATE.json
-packer validate $TEMPLATE.json
-packer build -force $TEMPLATE.json
+packer inspect ${TEMPLATE}.json
+packer build -force ${TEMPLATE}.json
+popd > /dev/null
+
