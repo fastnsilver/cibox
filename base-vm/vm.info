@@ -1,0 +1,9 @@
+DISTRIBUTIONS
+-------------
+centos-7.0-x64     CentOS 7.0 for x86_64 architectures
+rhel-7.0-x64       Red Hat Enterprise Linux 7.0 for x86_64 arhitectures
+
+PROVIDERS
+-------------
+virtualbox         Oracle Virtual Box
+vmware             VMWare Fusion (Mac OS X) or Workstation (Windows, Linux)
