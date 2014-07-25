@@ -67,7 +67,7 @@ Change directories and run `vagrant up --provider=<provider>`
 
 E.g., to create a RHEL 7.0 factory VM (with VirtualBox provider, assuming you've built base-vm)
 
-    cd factory-vm/rhel7
+    cd factory-vm/rhel-7.0-x64
     vagrant up --provider=virtualbox
 
 
