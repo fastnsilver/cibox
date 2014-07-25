@@ -29,4 +29,4 @@ RUN     echo 'X11Forwarding yes' >> /etc/ssh/ssh_config
 ADD		supervisord.conf /etc/
 ADD     etc/supervisor/conf.d/sshd.conf /etc/supervisor/conf.d/sshd.conf
 VOLUME	/var/log/supervisor
-CMD     ["/usr/bin/supervisord"]
+CMD     ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisord.conf"]

@@ -19,7 +19,7 @@ SCRIPT
 
 Vagrant.configure("2") do |config|
   config.vm.box = "rhel-7.0-x64"
-  config.vm.hostname = "factory"
+  #config.vm.hostname = "factory"
 
   config.ssh.forward_agent = true
   config.ssh.forward_x11 = true
