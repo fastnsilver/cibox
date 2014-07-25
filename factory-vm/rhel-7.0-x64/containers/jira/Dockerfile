@@ -1,6 +1,14 @@
-# Basics
+################################################################################
 #
-FROM fans/factory-base
+# JIRA
+#
+#    docker build -rm=true -t fans/jira .
+#    CONTAINER=$(docker run -d -p 2000:22 -p 9080:9080 -t fans/jira --link db:db --link stash:stash)
+#    ssh -X -l docker -p 2000 localhost
+#
+################################################################################
+
+FROM fans/atlassian:latest
 MAINTAINER Chris Phillipson <fastnsilver@gmail.com>
 
 # Install Jira
@@ -21,6 +29,7 @@ ADD launch.bash /launch
 
 WORKDIR /opt/jira
 VOLUME ["/opt/atlassian-home"]
+
 EXPOSE 9080
-USER jira
-CMD ["/launch"]
+
+ADD     etc/supervisor/conf.d/jira.conf /etc/supervisor/conf.d/jira.conf

@@ -1,6 +1,14 @@
-# Basics
+################################################################################
 #
-FROM fans/factory-base
+# Stash
+#
+#    docker build -rm=true -t fans/stash .
+#    CONTAINER=$(docker run -d -p 2000:22 -p 7990:7990 -t fans/stash --name stash --link db:db)
+#    ssh -X -l docker -p 2000 localhost
+#
+################################################################################
+
+FROM fans/atlassian:latest
 MAINTAINER Chris Phillipson <fastnsilver@gmail.com>
 
 # Install Stash
@@ -20,6 +28,7 @@ ADD launch.bash /launch
 
 WORKDIR /opt/stash
 VOLUME /opt/atlassian-home
+
 EXPOSE 7990
-USER stash
-CMD ["/launch"]
+
+ADD     etc/supervisor/conf.d/stash.conf /etc/supervisor/conf.d/stash.conf

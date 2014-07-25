@@ -1,32 +1,32 @@
-# Basics
+################################################################################
 #
-FROM rhel-server-docker-7.0-21.4.x86_64
+# Factory base container: 
+#	 YUM configuration, fundamental packages, docker user and SSH.
+#
+#    docker build -rm=true -t fans/factory-base .
+#    CONTAINER=$(docker run -d -p 2000:22 -t fans/factory-base)
+#    ssh -X -l docker -p 2000 localhost
+#
+################################################################################
+
+FROM rhel:rhel7
 MAINTAINER Chris Phillipson <fastnsilver@gmail.com>
-RUN yum -y update
-RUN yum -y install bzip2 tar wget
-RUN wget http://apt.sw.be/redhat/el6/en/x86_64/rpmforge/RPMS/xmlstarlet-1.5.0-1.el6.rf.x86_64.rpm
-RUN yum -y localinstall xmlstarlet-1.5.0-1.el6.rf.x86_64.rpm
 
-# Configure YUM to exclude postgres in favor of local installation
-RUN sed "$ a\exclude=postgresql*" /etc/yum/pluginconf.d/rhnplugin.conf
+# // TODO registration and subscription management required
 
-# Install PGDG RPM file 
-RUN yum -y localinstall http://yum.postgresql.org/9.4/redhat/rhel-7-x86_64/pgdg-redhat94-9.4-1.noarch.rpm
+RUN 	yum -y update
+RUN 	yum install -y openssh-server python-setuptools
+RUN 	easy_install pip
+RUN 	pip install supervisor
+RUN 	mkdir -p /var/run/sshd
+RUN 	mkdir -p /var/log/supervisor
 
-# Install PostgreSQL 
-RUN yum -y install postgresql94-server
+# PAM configuration breaks SSH logins
+RUN     rm /etc/pam.d/sshd
 
-# Setup volume handling
-RUN /usr/sbin/groupadd atlassian
-ADD own-volume.sh /usr/local/bin/own-volume
-RUN echo "%atlassian ALL=NOPASSWD: /usr/local/bin/own-volume" >> /etc/sudoers
-RUN mkdir -p /opt/atlassian-home
+RUN     echo 'X11Forwarding yes' >> /etc/ssh/ssh_config
 
-# Add common script functions
-ADD common.bash /usr/local/share/atlassian/common.bash
-RUN chgrp atlassian /usr/local/share/atlassian/common.bash
-RUN chmod g+w /usr/local/share/atlassian/common.bash
-
-EXPOSE 5432
-
-CMD ["/launch"]
+ADD		supervisord.conf /etc/
+ADD     etc/supervisor/conf.d/sshd.conf /etc/supervisor/conf.d/sshd.conf
+VOLUME	/var/log/supervisor
+CMD     ["/usr/bin/supervisord"]
