@@ -18,7 +18,7 @@ SCRIPT
 
 
 Vagrant.configure("2") do |config|
-  config.vm.box = ENV['TEMPLATE']
+  config.vm.box = "centos-7.0-x64"
   config.vm.hostname = "factory"
 
   config.ssh.forward_agent = true
