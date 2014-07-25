@@ -19,7 +19,7 @@ if NOT "%d%" == "" if NOT "%p%" == "" (
   vagrant version
   packer inspect %d%_%p%.json
   packer build -force %d%_%p%.json
-  vagrant box add --provider=%p% --name="%d%" %d%_%p%.box
+  vagrant box add --force --provider=%p% --name="%d%" %d%_%p%.box
 )
 GOTO Exit
 

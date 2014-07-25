@@ -74,6 +74,6 @@ else
      vagrant version
      packer inspect ${DISTRO}_${PROVIDER}.json
      packer build -force ${DISTRO}_${PROVIDER}.json
-     vagrant box add --provider=${PROVIDER} --name="$DISTRO" ${DISTRO}_${PROVIDER}.box
+     vagrant box add --force --provider=${PROVIDER} --name="$DISTRO" ${DISTRO}_${PROVIDER}.box
 popd > /dev/null
 fi
