@@ -8,13 +8,14 @@
 #
 ################################################################################
 
-FROM        fans/oracle7jdk:latest
+FROM        fans/oraclejdk7:latest
 MAINTAINER  Chris Phillipson <fastnsilver@gmail.com>
 
 
 ENV 	GO_SERVER_VERSION 14.2.0-377
 ENV 	JAVA_HOME /usr/java/default/
 
+RUN 	yum install -y wget
 RUN 	wget download.go.cd/gocd-rpm/go-server-$GO_SERVER_VERSION.noarch.rpm
 
 RUN		yum --nogpgcheck -y localinstall go-server-$GO_SERVER_VERSION.noarch.rpm

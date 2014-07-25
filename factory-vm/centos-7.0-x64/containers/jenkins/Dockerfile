@@ -9,12 +9,13 @@
 ################################################################################
 
 
-FROM        fans/oracle7jdk:latest
+FROM        fans/oraclejdk7:latest
 MAINTAINER  Chris Phillipson <fastnsilver@gmail.com>
 
 
 ENV 	JAVA_HOME /usr/java/default/
 
+RUN 	yum install -y wget
 
 # Fetch
 RUN 	wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.repo
