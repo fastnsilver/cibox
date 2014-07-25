@@ -6,12 +6,19 @@ Obtain the source
     
 You start by generating a base VM.  Base VM variants may be found in `base-vm` folder.
 
-To list available variants
+## To list available variants
 
     cd base-vm
-    ls -la
+
+### Mac OS X / Linux
     
-    
+    ./build.sh -l
+
+### Windows
+
+    build.bat -l
+
+
 ## Prepare base-vm (optional)
 
 If you choose to build a Red Hat Enterprise Linux version of the `base-vm` you will need to authenticate to the Red Hat Customer Portal.  
@@ -36,11 +43,17 @@ Finally, you'll want to download the [RHEL 7.0 Binary DVD](https://access.redhat
 
 ## Build base-vm
 
-### with Packer
+### Mac OS X / Linux
 
-    packer build <packer_filename>.json
+    ./build.sh -h
 
-`<packer_filename>` is the name of the build file used by [Packer](http://www.packer.io/docs/command-line/introduction.html).
+### Windows 
+
+    build.bat -h
+
+E.g., to build a CentOS 7.0 base-vm (on Windows with VirtualBox) 
+
+    build.bat -d centos-7.0-x64 -p virtualbox
 
 ### the end result...
 You will have a base box for use with Vagrant.
@@ -50,12 +63,12 @@ You will have a base box for use with Vagrant.
 
 To create a factory VM, review the variants available in the `factory-vm` folder.
 
-Change directories and run `vagrant up`
+Change directories and run `vagrant up --provider=<provider>`
 
-E.g., to create a RHEL 7.0 factory VM
+E.g., to create a RHEL 7.0 factory VM (with VirtualBox provider, assuming you've built base-vm)
 
     cd factory-vm/rhel7
-    vagrant up
+    vagrant up --provider=virtualbox
 
 
 ## Use factory-vm

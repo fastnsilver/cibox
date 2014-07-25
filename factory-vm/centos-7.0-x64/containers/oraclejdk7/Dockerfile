@@ -4,7 +4,7 @@
 #
 #    docker build -rm=true -t fans/oraclejdk7 .
 #    CONTAINER=$(docker run -d -p 2000:22 -t fans/oraclejdk7)
-#    ssh -X -l factory -p 2000 localhost
+#    ssh -X -l docker -p 2000 localhost
 #
 ################################################################################
 

@@ -3,8 +3,8 @@
 # Go Server
 #
 #    docker build -rm=true -t fans/go-server .
-#    CONTAINER=$(docker run -d -p 8153:8153 -t fans/go-server)
-#    ssh -X -l go-server -p 8153 localhost
+#    CONTAINER=$(docker run -d -p 2000:22 -p 8153:8153 -t fans/go-server)
+#    ssh -X -l docker -p 2000 localhosts
 #
 ################################################################################
 

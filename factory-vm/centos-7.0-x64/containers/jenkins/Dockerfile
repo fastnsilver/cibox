@@ -4,7 +4,7 @@
 #
 #    docker build -rm=true -t fans/jenkins .
 #    CONTAINER=$(docker run -d -p 2000:22 -p 8080:8080 -t fans/jenkins)
-#    ssh -X -l fans -p 2000 localhost
+#    ssh -X -l docker -p 2000 localhost
 #
 ################################################################################
 

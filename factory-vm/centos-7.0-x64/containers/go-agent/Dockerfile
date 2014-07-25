@@ -3,8 +3,8 @@
 # Go Agent
 #
 #    docker build -rm=true -t fans/go-agent .
-#    CONTAINER=$(docker run -d -p 8154:8154 -t fans/go-agent -e SERVER_PORT_8153_TCP_ADDR=localhost -e SERVER_PORT_8153_TCP_PORT=8153)
-#    ssh -X -l go-agent -p 8154 localhost
+#    CONTAINER=$(docker run -d -p 2000:22 -p 8154:8154 -t fans/go-agent -e SERVER_PORT_8153_TCP_ADDR=localhost -e SERVER_PORT_8153_TCP_PORT=8153)
+#    ssh -X -l docker -p 2000 localhost
 #
 ################################################################################
 

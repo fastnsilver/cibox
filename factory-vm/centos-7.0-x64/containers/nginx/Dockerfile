@@ -4,7 +4,7 @@
 #
 #    docker build -rm=true -t fans/nginx .
 #    CONTAINER=$(docker run -d -p 2000:22 -p 8000:80 -t fans/nginx)
-#    ssh -X -l fans -p 2000 localhost
+#    ssh -X -l docker -p 2000 localhost
 #
 ################################################################################
 

@@ -1,3 +1,12 @@
+################################################################################
+#
+# PostgreSQL 9.4
+#
+#    docker build -rm=true -t fans/postgresql94 .
+#    CONTAINER=$(docker run -d -p 2000:22 -p 5432:5432 -t fans/postgresql94)
+#    ssh -X -l docker -p 2000 localhost
+#
+################################################################################
 
 ## @see https://github.com/cthulhuology/docker-postgresql/blob/master/Dockerfile
 

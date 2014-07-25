@@ -1,5 +1,13 @@
-# Basics
+################################################################################
 #
+# Stash
+#
+#    docker build -rm=true -t fans/stash .
+#    CONTAINER=$(docker run -d -p 2000:22 -p 7990:7990 -t fans/stash --name stash --link db:db)
+#    ssh -X -l docker -p 2000 localhost
+#
+################################################################################
+
 FROM fans/atlassian:latest
 MAINTAINER Chris Phillipson <fastnsilver@gmail.com>
 

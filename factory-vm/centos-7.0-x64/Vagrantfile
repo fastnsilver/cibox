@@ -35,28 +35,31 @@ Vagrant.configure("2") do |config|
   # Docker
   # @see https://docs.vagrantup.com/v2/provisioning/docker.html
   config.vm.provision "docker" do |d|
+
     d.build_image "/opt/containers/base", args: "--rm=true -t fans/factory-base"
-    d.run "fans/factory-base", args: "-p 2000:22"
     d.build_image "/opt/containers/oraclejdk7", args: "--rm=true -t fans/oraclejdk7"
-    d.run "fans/oraclejdk7"
     d.build_image "/opt/containers/postgresql94", args: "--rm=true -t fans/postgresql94"
-    d.run "fans/postgresql94", args: "-p 5432:5432"
-    d.build_image "/opt/containers/atlassian", auto_assign_name: false, args: "--rm=true -t fans/atlassian --name=db"
-    d.run "fans/atlassian", cmd: "/usr/local/share/atlassian/initialise_db.sh"
+    d.build_image "/opt/containers/atlassian", args: "--rm=true -t fans/atlassian"
     d.build_image "/opt/containers/nginx", args: "--rm=true -t fans/nginx"
-    d.run "fans/nginx", args: "-p 80:80"
     d.build_image "/opt/containers/jenkins", args: "--rm=true -t fans/jenkins"
-    d.run "fans/jenkins", args: "-p 8080:8080"
     d.build_image "/opt/containers/go-server", args: "--rm=true -t fans/go-server"
-    d.run "fans/go-server", args: "-p 8153:8153"
     d.build_image "/opt/containers/go-agent", args: "--rm=true -t fans/go-agent"
-    d.run "fans/go-agent", args: "-e SERVER_PORT_8153_TCP_ADDR=localhost -e SERVER_PORT_8153_TCP_PORT=8153"
-    d.build_image "/opt/containers/stash", auto_assign_name: false, args: "--rm=true -t fans/stash --name=stash"
-    d.run "fans/stash", args: "-p 7990:7990 --link db:db"
+    d.build_image "/opt/containers/stash", args: "--rm=true -t fans/stash"
     d.build_image "/opt/containers/jira", args: "--rm=true -t fans/jira"
-    d.run "fans/jira", args: "-p 9080:9080 --link db:db --link stash:stash"
     d.build_image "/opt/containers/docker-registry", args: "--rm=true -t fans/docker-registry"
+
+    d.run "fans/factory-base", args: "-p 2000:22"
+    d.run "fans/oraclejdk7"
+    d.run "fans/postgresql94", args: "-p 5432:5432"
+    d.run "fans/atlassian", auto_assign_name: false, args: "--name db", cmd: "/usr/local/share/atlassian/initialise_db.sh"
+    d.run "fans/nginx", args: "-p 80:80"
+    d.run "fans/jenkins", args: "-p 8080:8080"
+    d.run "fans/go-server", args: "-p 8153:8153"
+    d.run "fans/go-agent", args: "-e SERVER_PORT_8153_TCP_ADDR=localhost -e SERVER_PORT_8153_TCP_PORT=8153"
+    d.run "fans/stash", auto_assign_name: false, args: "--name stash -p 7990:7990 --link db:db"
+    d.run "fans/jira", args: "-p 9080:9080 --link db:db --link stash:stash"
     d.run "fans/docker-registry", args: "-p 5000:5000"
+
   end
 
   # Ports

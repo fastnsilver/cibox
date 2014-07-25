@@ -1,3 +1,12 @@
+################################################################################
+#
+# Atlassian product base
+#
+#    docker build -rm=true -t fans/atlassian .
+#    CONTAINER=$(docker run -d -p 2000:22 -t fans/atlassian --name db)
+#    ssh -X -l docker -p 2000 localhost
+#
+################################################################################
 
 FROM fans/postgresql94:latest
 MAINTAINER Chris Phillipson <fastnsilver@gmail.com>
