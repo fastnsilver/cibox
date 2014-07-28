@@ -65,15 +65,24 @@ then
      usage
      exit 1
 else 
-     SAVEPATH=`pwd`
-     SCRIPTPATH=`dirname $0`
-     pushd $SAVEPATH > /dev/null
-     cd $SCRIPTPATH
-     cd $DISTRO
-     packer --version
-     vagrant version
-     packer inspect ${DISTRO}_${PROVIDER}.json
-     packer build -force ${DISTRO}_${PROVIDER}.json
-     vagrant box add --force --provider=${PROVIDER} --name="$DISTRO" ${DISTRO}_${PROVIDER}.box
+    SAVEPATH=`pwd`
+    SCRIPTPATH=`dirname $0`
+    pushd $SAVEPATH > /dev/null
+    cd $SCRIPTPATH
+    cd $DISTRO
+    packer --version
+    vagrant version
+    packer inspect ${DISTRO}_${PROVIDER}.json
+    packer build -force ${DISTRO}_${PROVIDER}.json
+
+    # Special handling for vmware - must import with provider of vmware_desktop to 
+    # be insensitive to whether it's vmware_fusion or vmware_workstation or other VMware product
+    for s in $PROVIDER; do
+        if case ${PROVIDER} in *"vmware"*) true;; *) false;; esac; then
+            vagrant box add --force --provider=${PROVIDER}_desktop --name="$DISTRO" ${DISTRO}_${PROVIDER}.box 
+        else
+            vagrant box add --force --provider=${PROVIDER} --name="$DISTRO" ${DISTRO}_${PROVIDER}.box            
+        fi
+    done
 popd > /dev/null
 fi
