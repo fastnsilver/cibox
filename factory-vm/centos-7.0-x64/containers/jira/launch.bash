@@ -3,7 +3,7 @@ trap 'exit' ERR
 
 . /usr/local/share/atlassian/common.bash
 
-own-volume
+chown jira:jira /opt/atlassian-home
 rm -f /opt/atlassian-home/.jira-home.lock
 
 if [ "$CONTEXT_PATH" == "ROOT" -o -z "$CONTEXT_PATH" ]; then

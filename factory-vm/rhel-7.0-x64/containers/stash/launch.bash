@@ -1,9 +1,9 @@
 #!/bin/bash
-set -o errexit
+trap 'exit' ERR
 
 . /usr/local/share/atlassian/common.bash
 
-own-volume
+chown stash:stash /opt/atlassian-home
 umask 0027
 
 if [ -z "$STASH_HOME" ]; then
