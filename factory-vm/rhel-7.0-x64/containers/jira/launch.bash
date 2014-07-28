@@ -3,7 +3,7 @@ set -o errexit
 
 . /usr/local/share/atlassian/common.bash
 
-sudo own-volume
+own-volume
 rm -f /opt/atlassian-home/.jira-home.lock
 
 if [ "$CONTEXT_PATH" == "ROOT" -o -z "$CONTEXT_PATH" ]; then

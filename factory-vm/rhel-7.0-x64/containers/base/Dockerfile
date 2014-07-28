@@ -15,7 +15,7 @@ MAINTAINER Chris Phillipson <fastnsilver@gmail.com>
 # // TODO registration and subscription management required
 
 RUN 	yum -y update
-RUN 	yum install -y sudo openssh-server python-setuptools
+RUN 	yum install -y openssh-server python-setuptools
 RUN 	easy_install pip
 RUN 	pip install supervisor
 RUN 	mkdir -p /var/run/sshd

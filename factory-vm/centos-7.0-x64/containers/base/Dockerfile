@@ -13,7 +13,7 @@ FROM centos:centos7
 MAINTAINER Chris Phillipson <fastnsilver@gmail.com>
 
 RUN 	yum -y update
-RUN 	yum install -y sudo openssh-server python-setuptools
+RUN 	yum install -y openssh-server python-setuptools
 RUN 	easy_install pip
 RUN 	pip install supervisor
 RUN 	mkdir -p /var/run/sshd
