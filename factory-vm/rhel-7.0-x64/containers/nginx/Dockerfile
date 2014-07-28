@@ -20,3 +20,8 @@ RUN     yum install -y nginx
 ADD     etc/nginx/nginx.conf /etc/nginx/nginx.conf
 ADD     etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf
 ADD     etc/supervisor/conf.d/nginx.conf /etc/supervisor/conf.d/nginx.conf
+
+# fix -- nginx fails to write to /var/cache/nginx/client_temp
+RUN 	chown -R nginx:nginx /var/cache/nginx
+
+EXPOSE 80
