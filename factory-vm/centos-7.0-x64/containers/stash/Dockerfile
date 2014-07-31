@@ -13,7 +13,7 @@ MAINTAINER Chris Phillipson <fastnsilver@gmail.com>
 
 # Install Stash
 
-ENV STASH_VERSION 3.1.1
+ENV STASH_VERSION 3.2.0
 RUN curl -Lks http://www.atlassian.com/software/stash/downloads/binary/atlassian-stash-${STASH_VERSION}.tar.gz -o /root/stash.tar.gz
 RUN /usr/sbin/useradd --create-home --home-dir /opt/stash --groups atlassian --shell /bin/bash stash
 RUN tar zxf /root/stash.tar.gz --strip=1 -C /opt/stash

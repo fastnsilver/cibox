@@ -4,7 +4,7 @@ trap 'exit' ERR
 
 # Set local variables
 VAGRANT_HOME=/home/vagrant
-GIT_VERSION=2.0.2
+GIT_VERSION=2.0.4
 
 # Get and install EPEL
 wget --retry-connrefused http://mirrors.mit.edu/epel/beta/7/x86_64/epel-release-7-0.2.noarch.rpm
@@ -27,7 +27,7 @@ rm -rf $VAGRANT_HOME/git-$GIT_VERSION*
 # Install docker
 yum install -y docker-io
 systemctl enable docker.service
-echo -e 'DOCKER_OPTS="-H tcp://0.0.0.0:4243 -H unix:///var/run/docker.sock"\n' > /etc/default/docker
+echo -e 'DOCKER_OPTS="-H tcp://0.0.0.0:4243 -H unix:///var/run/docker.sock"\n' > /etc/sysconfig/docker
 systemctl start docker.service
 systemctl status docker.service
 usermod -a -G docker vagrant
