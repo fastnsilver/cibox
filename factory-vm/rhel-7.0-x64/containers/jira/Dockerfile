@@ -22,7 +22,7 @@ RUN echo "jira.home = /opt/atlassian-home" > /opt/jira/atlassian-jira/WEB-INF/cl
 RUN chown -R jira:jira /opt/jira
 RUN mv /opt/jira/conf/server.xml /opt/jira/conf/server-backup.xml
 
-ADD initialise_db.sh /usr/local/share/atlassian/initialise_jiradb.sh
+ADD initialise_jiradb.sh /usr/local/share/atlassian/initialise_jiradb.sh
 RUN chgrp atlassian /usr/local/share/atlassian/initialise_jiradb.sh
 RUN chmod g+w /usr/local/share/atlassian/initialise_jiradb.sh
 
