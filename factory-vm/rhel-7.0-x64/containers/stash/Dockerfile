@@ -21,14 +21,18 @@ RUN sed -i -e "s/^#!\/bin\/sh/#!\/bin\/bash/" /opt/stash/bin/catalina.sh
 RUN mv /opt/stash/conf/server.xml /opt/stash/conf/server-backup.xml
 RUN chown -R stash:stash /opt/stash
 
+ADD initialise_db.sh /usr/local/share/atlassian/initialise_stashdb.sh
+RUN chgrp atlassian /usr/local/share/atlassian/initialise_stashdb.sh
+RUN chmod g+w /usr/local/share/atlassian/initialise_stashdb.sh
+
 ENV CONTEXT_PATH ROOT
-ADD launch.bash /launch
+ADD launch.sh /launch
 
 # Launching Stash
 
 WORKDIR /opt/stash
 VOLUME /opt/atlassian-home
 
-EXPOSE 7990
+EXPOSE 7990 7999
 
 ADD     etc/supervisor/conf.d/stash.conf /etc/supervisor/conf.d/stash.conf

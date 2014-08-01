@@ -1,9 +1,10 @@
-#!/bin/bash
+#!/bin/sh
 trap 'exit' ERR
 
-. /usr/local/share/atlassian/common.bash
+. /usr/local/share/atlassian/common.sh
 
-chown stash:stash /opt/atlassian-home
+/usr/local/share/atlassian/initialise_stashdb.sh
+sudo own-volume
 umask 0027
 
 if [ -z "$STASH_HOME" ]; then

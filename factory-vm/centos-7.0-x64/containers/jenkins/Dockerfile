@@ -9,7 +9,7 @@
 ################################################################################
 
 
-FROM        fans/oraclejdk7:latest
+FROM        fans/oraclejdk8:latest
 MAINTAINER  Chris Phillipson <fastnsilver@gmail.com>
 
 

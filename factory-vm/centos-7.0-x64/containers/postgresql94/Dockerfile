@@ -10,7 +10,7 @@
 
 ## @see https://github.com/cthulhuology/docker-postgresql/blob/master/Dockerfile
 
-FROM fans/oraclejdk7:latest
+FROM fans/oraclejdk8:latest
 MAINTAINER Chris Phillipson <fastnsilver@gmail.com>
 
 # Configure YUM to exclude postgres in favor of local installation

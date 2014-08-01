@@ -1,9 +1,9 @@
 ################################################################################
 #
-# Oracle JDK 7
+# Oracle JDK 8
 #
-#    docker build -rm=true -t fans/oraclejdk7 .
-#    CONTAINER=$(docker run -d -p 2000:22 -t fans/oraclejdk7)
+#    docker build -rm=true -t fans/oraclejdk8 .
+#    CONTAINER=$(docker run -d -p 2000:22 -t fans/oraclejdk8)
 #    ssh -X -l docker -p 2000 localhost
 #
 ################################################################################
@@ -11,14 +11,14 @@
 FROM        fans/factory-base:latest
 MAINTAINER  Chris Phillipson <fastnsilver@gmail.com>
 
-# Install Oracle JDK 7
+# Install Oracle JDK 8
 
-# Installs 1.7.0_xx version
+# Installs 1.8.0_xx version
 # @see http://lalyos.github.io/blog/2014/03/18/oracle-jdk-7-on-centos/
-RUN 	curl -LO 'http://download.oracle.com/otn-pub/java/jdk/7u65-b17/jdk-7u65-linux-x64.rpm' \
+RUN 	curl -LO 'http://download.oracle.com/otn-pub/java/jdk/8u11-b12/jdk-8u11-linux-x64.rpm' \
 		-H 'Cookie: oraclelicense=accept-securebackup-cookie'
 
-RUN 	yum --nogpgcheck -y localinstall jdk-7u65-linux-x64.rpm
+RUN 	yum --nogpgcheck -y localinstall jdk-8u11-linux-x64.rpm
 
 # Set alternatives and JAVA_HOME
 # @see http://serverfault.com/questions/50883/what-is-the-value-of-java-home-for-centos

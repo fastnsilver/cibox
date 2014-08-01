@@ -1,9 +1,10 @@
-#!/bin/bash
+#!/bin/sh
 trap 'exit' ERR
 
-. /usr/local/share/atlassian/common.bash
+. /usr/local/share/atlassian/common.sh
 
-chown jira:jira /opt/atlassian-home
+sudo /usr/local/share/atlassian/initialise_jiradb.sh
+sudo own-volume
 rm -f /opt/atlassian-home/.jira-home.lock
 
 if [ "$CONTEXT_PATH" == "ROOT" -o -z "$CONTEXT_PATH" ]; then

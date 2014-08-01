@@ -1,6 +1,6 @@
 ################################################################################
 #
-# OpenJDK 7
+# Oracle JDK 7
 #
 #    docker build -rm=true -t fans/oraclejdk7 .
 #    CONTAINER=$(docker run -d -p 2000:22 -t fans/oraclejdk7)
