@@ -33,10 +33,18 @@ Attention is focused on three operating system variants: Linux, Mac OS X, and Wi
 
 
 ### Mac OS X
-
-    // TODO
     
-On Macs, either install [Xcode](https://developer.apple.com/xcode/downloads/) or use [Homebrew](http://mxcl.github.io/homebrew/) to install `apple-gcc42` or `build-essential`.
+On Macs, install [Xcode](https://developer.apple.com/xcode/downloads/), then install [Homebrew](http://mxcl.github.io/homebrew/).
+
+Open a `Terminal` shell as Administrator, and type:
+
+    brew install git
+    brew install packer
+    brew tap caskroom/cask
+    brew tap homebrew/binary
+    brew tap homebrew/versions
+    brew cask install virtualbox
+    brew cask install vagrant
 
 
 ### Windows
