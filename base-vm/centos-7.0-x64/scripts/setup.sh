@@ -24,7 +24,7 @@ DOCKER_VERSION=1.2.0
 DOCKER_ARCH=1.el6.x86_64
 curl -o $VAGRANT_HOME/docker-io-$DOCKER_VERSION-$DOCKER_ARCH.rpm -kL http://kojipkgs.fedoraproject.org/packages/docker-io/$DOCKER_VERSION/1.el6/x86_64/docker-io-$DOCKER_VERSION-$DOCKER_ARCH.rpm
 chown vagrant:vagrant $VAGRANT_HOME/docker-io-$DOCKER_VERSION-$DOCKER_ARCH.rpm
-yum -y localinstall docker-io-docker-io-$DOCKER_VERSION-$DOCKER_ARCH.rpm
+yum -y localinstall docker-io-$DOCKER_VERSION-$DOCKER_ARCH.rpm
 systemctl enable docker.service
 echo -e 'DOCKER_OPTS="-H tcp://0.0.0.0:4243 -H unix:///var/run/docker.sock"\n' > /etc/sysconfig/docker
 systemctl start docker.service
