@@ -1,4 +1,4 @@
-EvetnBus#!/bin/bash
+#!/bin/bash
 
 trap 'exit' ERR
 
@@ -8,7 +8,7 @@ GIT_VERSION=2.1.0
 
 # Get and install Git
 yum install -y curl gcc "kernel-devel-$(uname -r)" kernel-devel kernel-headers \
-	curl-devel expat-devel gettext-devel openssl-devel zlib-devel perl-ExtUtils-MakeMaker
+	curl-devel expat-devel gettext-devel libvirt libvirt-client python-virtinst openssl-devel zlib-devel perl-ExtUtils-MakeMaker
 wget --retry-connrefused https://www.kernel.org/pub/software/scm/git/git-$GIT_VERSION.tar.gz
 chown vagrant:vagrant $VAGRANT_HOME/git-$GIT_VERSION.tar.gz
 tar xzf git-$GIT_VERSION.tar.gz
@@ -20,6 +20,7 @@ source /etc/bashrc
 rm -rf $VAGRANT_HOME/git-$GIT_VERSION*
 
 # Install docker
+cd $VAGRANT_HOME
 DOCKER_VERSION=1.2.0
 DOCKER_ARCH=1.el6.x86_64
 wget --retry-connrefused http://kojipkgs.fedoraproject.org/packages/docker-io/$DOCKER_VERSION/1.el6/x86_64/docker-io-$DOCKER_VERSION-$DOCKER_ARCH.rpm

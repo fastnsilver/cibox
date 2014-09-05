@@ -24,7 +24,7 @@ yum groupinstall -y "Development Tools" "X Window System"
 
 
 # Get and install Git
-yum -y install curl-devel expat-devel gettext-devel openssl openssl-devel zlib-devel perl-ExtUtils-MakeMaker
+yum -y install curl-devel expat-devel gettext-devel libvirt libvirt-client python-virtinst openssl openssl-devel zlib-devel perl-ExtUtils-MakeMaker
 wget --retry-connrefused https://www.kernel.org/pub/software/scm/git/git-$GIT_VERSION.tar.gz
 chown vagrant:vagrant $VAGRANT_HOME/git-$GIT_VERSION.tar.gz
 tar xzf git-$GIT_VERSION.tar.gz
