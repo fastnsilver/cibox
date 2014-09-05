@@ -4,7 +4,7 @@ trap 'exit' ERR
 
 # Set local variables
 VAGRANT_HOME=/home/vagrant
-GIT_VERSION=2.0.4
+GIT_VERSION=2.1.0
 
 # Get and install Git
 yum install -y curl gcc "kernel-devel-$(uname -r)" kernel-devel kernel-headers \
