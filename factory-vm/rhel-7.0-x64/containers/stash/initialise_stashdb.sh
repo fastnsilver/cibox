@@ -39,5 +39,5 @@ chmod 0600 $HOME/.pgpass
 
 echo "
 CREATE ROLE stashuser WITH LOGIN PASSWORD 'jellyfish' VALID UNTIL 'infinity';
-CREATE DATABASE stash WITH ENCODING='UTF8' OWNER=stashuser TEMPLATE=template0 CONNECTION LIMIT=-1;" \
+CREATE DATABASE stash WITH ENCODING='UTF8' OWNER=stashuser CONNECTION LIMIT=-1;" \
 | PGPASSWORD="docker" psql -h $PSQL_IP -p $PSQL_PORT -d docker -U docker -w
