@@ -7,8 +7,8 @@ VAGRANT_HOME=/home/vagrant
 GIT_VERSION=2.1.0
 
 # Get and install Git
-yum install -y curl gcc "kernel-devel-$(uname -r)" kernel-devel kernel-headers \
-	curl-devel expat-devel gettext-devel openssl-devel zlib-devel perl-ExtUtils-MakeMaker
+yum install -y curl gcc intltool gperf glib2-devel "kernel-devel-$(uname -r)" kernel-devel kernel-headers \
+	curl-devel expat-devel gettext-devel libcap-devel openssl-devel xz-devel zlib-devel perl-ExtUtils-MakeMaker
 wget --retry-connrefused https://www.kernel.org/pub/software/scm/git/git-$GIT_VERSION.tar.gz
 chown vagrant:vagrant $VAGRANT_HOME/git-$GIT_VERSION.tar.gz
 tar xzf git-$GIT_VERSION.tar.gz
@@ -18,6 +18,16 @@ make prefix=/usr/local/git install
 echo "export PATH=/usr/local/git/bin:$PATH" >> /etc/bashrc
 source /etc/bashrc
 rm -rf $VAGRANT_HOME/git-$GIT_VERSION*
+
+# Update systemd
+# @see http://linoxide.com/linux-how-to/install-systemd-centos-redhat/
+cd $VAGRANT_HOME
+wget --retry-connrefused http://www.freedesktop.org/software/systemd/systemd-216.tar.xz 
+chown vagrant:vagrant $VAGRANT_HOME/systemd-216.tar.xz
+tar -xJf systemd-216.tar.xz
+cd systemd-216
+./configure
+make && make install
 
 # Install docker
 cd $VAGRANT_HOME
