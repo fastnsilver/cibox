@@ -3,8 +3,8 @@
 # Stash
 #
 #    docker build -rm=true -t fans/stash .
-#    CONTAINER=$(docker run -d -p 2000:22 -p 7990:7990 -t fans/stash --name stash --link db:db)
-#    ssh -X -l docker -p 2000 localhost
+#    CONTAINER=$(docker run -d -p 7990:7990 -t fans/stash --name stash --link db:db)
+#    ./docker-enter -u stash $CONTAINER
 #
 ################################################################################
 

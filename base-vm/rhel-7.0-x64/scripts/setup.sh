@@ -22,10 +22,6 @@ subscription-manager repos --enable rhel-7-server-thirdparty-oracle-java-rpms
 yum install -y bzip2 curl gcc "kernel-devel-$(uname -r)" kernel-devel kernel-headers wget net-tools sudo
 yum groupinstall -y "Development Tools" "X Window System"
 
-# Get and install EPEL
-wget --retry-connrefused http://mirrors.mit.edu/epel/beta/7/x86_64/epel-release-7-0.2.noarch.rpm
-chown vagrant:vagrant $VAGRANT_HOME/epel-release-7-0.2.noarch.rpm
-yum -y install epel-release-7-0.2.noarch.rpm
 
 # Get and install Git
 yum -y install curl-devel expat-devel gettext-devel openssl openssl-devel zlib-devel perl-ExtUtils-MakeMaker
@@ -40,7 +36,7 @@ source /etc/bashrc
 rm -rf $VAGRANT_HOME/git-$GIT_VERSION*
 
 # Install Docker and start service
-yum install -y docker-io
+yum install -y docker
 systemctl enable docker.service
 echo -e 'DOCKER_OPTS="-H tcp://0.0.0.0:4243 -H unix:///var/run/docker.sock"\n' > /etc/sysconfig/docker
 systemctl start docker.service
@@ -50,6 +46,14 @@ usermod -a -G docker vagrant
 # Import Red Hat 7 container
 # @see https://docs.docker.com/reference/commandline/cli/#import
 cat $VAGRANT_HOME/rhel-server-docker-7.0-21.4-x86_64.tar.gz | docker import - rhel:rhel7
+
+# Provide means for entering a running Docker container other than SSH
+# @see https://github.com/Pithikos/docker-enter
+# wget https://raw.githubusercontent.com/Pithikos/docker-enter/master/docker-enter.c
+# chown vagrant:vagrant $VAGRANT_HOME/docker-enter.c
+# chmod +w $VAGRANT_HOME/docker-enter.c
+# gcc $VAGRANT_HOME/docker-enter.c -o docker-enter
+# rm -f $VAGRANT_HOME/docker-enter.c
 
 # Install appliance-tools. 
 # Appliance tools is one method that can be used for creating a VM that can be packaged into a docker container.

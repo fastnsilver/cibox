@@ -63,7 +63,7 @@ Vagrant.configure("2") do |config|
     d.run "fans/jenkins", args: "-p 8080:8080"
     d.run "fans/go-server", args: "-p 8153:8153"
     d.run "fans/go-agent", args: "-e SERVER_PORT_8153_TCP_ADDR=localhost -e SERVER_PORT_8153_TCP_PORT=8153"
-    d.run "fans/stash", auto_assign_name: false, args: "--name stash -p 7990:7990 -p 7999:22 --link db:db"
+    d.run "fans/stash", auto_assign_name: false, args: "--name stash -p 7990:7990 --link db:db"
     d.run "fans/jira", args: "-p 9080:9080 --link db:db --link stash:stash"
 
   end

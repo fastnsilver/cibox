@@ -1,4 +1,4 @@
-#!/bin/bash
+EvetnBus#!/bin/bash
 
 trap 'exit' ERR
 
@@ -6,15 +6,10 @@ trap 'exit' ERR
 VAGRANT_HOME=/home/vagrant
 GIT_VERSION=2.0.4
 
-# Get and install EPEL
-wget --retry-connrefused http://mirrors.mit.edu/epel/beta/7/x86_64/epel-release-7-0.2.noarch.rpm
-chown vagrant:vagrant $VAGRANT_HOME/epel-release-7-0.2.noarch.rpm
-yum -y install epel-release-7-0.2.noarch.rpm
-
 # Get and install Git
 yum install -y curl gcc "kernel-devel-$(uname -r)" kernel-devel kernel-headers \
 	curl-devel expat-devel gettext-devel openssl-devel zlib-devel perl-ExtUtils-MakeMaker
-wget https://www.kernel.org/pub/software/scm/git/git-$GIT_VERSION.tar.gz
+wget --retry-connrefused https://www.kernel.org/pub/software/scm/git/git-$GIT_VERSION.tar.gz
 chown vagrant:vagrant $VAGRANT_HOME/git-$GIT_VERSION.tar.gz
 tar xzf git-$GIT_VERSION.tar.gz
 cd git-$GIT_VERSION
@@ -25,7 +20,9 @@ source /etc/bashrc
 rm -rf $VAGRANT_HOME/git-$GIT_VERSION*
 
 # Install docker
-yum install -y docker-io
+curl -o $VAGRANT_HOME/docker-io-1.1.2-2.fc20.x86_64.rpm -kL https://kojipkgs.fedoraproject.org/packages/docker-io/1.1.2/2.fc20/x86_64/docker-io-1.1.2-2.fc20.x86_64.rpm
+chown vagrant:vagrant $VAGRANT_HOME/docker-io-1.1.2-2.fc20.x86_64.rpm
+yum -y localinstall docker-io-1.1.2-2.fc20.x86_64.rpm
 systemctl enable docker.service
 echo -e 'DOCKER_OPTS="-H tcp://0.0.0.0:4243 -H unix:///var/run/docker.sock"\n' > /etc/sysconfig/docker
 systemctl start docker.service
@@ -34,6 +31,14 @@ usermod -a -G docker vagrant
 
 # Pull Centos 7 container
 docker pull centos:centos7
+
+# Provide means for entering a running Docker container other than SSH
+# @see https://github.com/Pithikos/docker-enter
+# wget https://raw.githubusercontent.com/Pithikos/docker-enter/master/docker-enter.c
+# chown vagrant:vagrant $VAGRANT_HOME/docker-enter.c
+# chmod +w $VAGRANT_HOME/docker-enter.c
+# gcc $VAGRANT_HOME/docker-enter.c -o docker-enter
+# rm -f $VAGRANT_HOME/docker-enter.c
 
 # Install appliance-tools. 
 # Appliance tools is one method that can be used for creating a VM that can be packaged into a docker container.

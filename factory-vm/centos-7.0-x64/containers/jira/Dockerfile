@@ -3,8 +3,8 @@
 # JIRA
 #
 #    docker build -rm=true -t fans/jira .
-#    CONTAINER=$(docker run -d -p 2000:22 -p 9080:9080 -t fans/jira --link db:db --link stash:stash)
-#    ssh -X -l docker -p 2000 localhost
+#    CONTAINER=$(docker run -d -p 9080:9080 -t fans/jira --link db:db --link stash:stash)
+#    ./docker-enter -u jira $CONTAINER
 #
 ################################################################################
 

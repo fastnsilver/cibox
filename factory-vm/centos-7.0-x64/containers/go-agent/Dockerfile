@@ -3,8 +3,8 @@
 # Go Agent
 #
 #    docker build -rm=true -t fans/go-agent .
-#    CONTAINER=$(docker run -d -p 2000:22 -p 8154:8154 -t fans/go-agent -e SERVER_PORT_8153_TCP_ADDR=localhost -e SERVER_PORT_8153_TCP_PORT=8153)
-#    ssh -X -l docker -p 2000 localhost
+#    CONTAINER=$(docker run -d -p 8154:8154 -t fans/go-agent -e SERVER_PORT_8153_TCP_ADDR=localhost -e SERVER_PORT_8153_TCP_PORT=8153)
+#    ./docker-enter -u root $CONTAINER
 #
 ################################################################################
 
@@ -15,14 +15,11 @@ MAINTAINER  Chris Phillipson <fastnsilver@gmail.com>
 ENV 	GO_AGENT_VERSION 14.2.0-377
 ENV 	JAVA_HOME /usr/java/default/
 
-RUN 	yum install -y wget
-RUN 	wget download.go.cd/gocd-rpm/go-agent-$GO_AGENT_VERSION.noarch.rpm
-
-RUN		yum --nogpgcheck -y localinstall go-agent-$GO_AGENT_VERSION.noarch.rpm
-
-RUN 	rm -f go-agent-$GO_AGENT_VERSION.noarch.rpm
-
-RUN 	sed -r -i "s/^(GO_SERVER)=(.*)/\1=\$SERVER_PORT_8153_TCP_ADDR/g" /etc/default/go-agent
+RUN 	yum install -y wget && \
+			wget download.go.cd/gocd-rpm/go-agent-$GO_AGENT_VERSION.noarch.rpm && \
+			yum --nogpgcheck -y localinstall go-agent-$GO_AGENT_VERSION.noarch.rpm && \
+			rm -f go-agent-$GO_AGENT_VERSION.noarch.rpm && \
+			sed -r -i "s/^(GO_SERVER)=(.*)/\1=\$SERVER_PORT_8153_TCP_ADDR/g" /etc/default/go-agent
 
 VOLUME 	["/var/lib/go-agent"]
 

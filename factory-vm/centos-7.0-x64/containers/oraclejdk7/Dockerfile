@@ -3,8 +3,9 @@
 # Oracle JDK 7
 #
 #    docker build -rm=true -t fans/oraclejdk7 .
-#    CONTAINER=$(docker run -d -p 2000:22 -t fans/oraclejdk7)
-#    ssh -X -l docker -p 2000 localhost
+#
+# 	 Not meant to be run, rather provide environment for Java development in 
+#    derivative containers
 #
 ################################################################################
 
