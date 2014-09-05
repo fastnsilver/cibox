@@ -18,16 +18,15 @@ RUN sed "/\[base\]/a\exclude=postgresql*" /etc/yum.repos.d/CentOS-Base.repo
 RUN sed "/\[updates\]/a\exclude=postgresql*" /etc/yum.repos.d/CentOS-Base.repo
 
 # Install PGDG RPM file 
-RUN yum -y localinstall http://yum.postgresql.org/9.4/redhat/rhel-7-x86_64/pgdg-centos94-9.4-1.noarch.rpm
+RUN yum -y localinstall http://yum.postgresql.org/9.4/redhat/rhel-7-x86_64/pgdg-redhat94-9.4-1.noarch.rpm
 
 # Install PostgreSQL 
-RUN yum -y install postgresql94-server postgresql94-contrib
-
+RUN yum -y groupinstall "PostgreSQL Database Server 9.4 PGDG"
 
 RUN 	su - postgres -c '/usr/pgsql-9.4/bin/initdb -D /var/lib/pgsql/data'
 
 # Set permissions to allow logins, trust the bridge, this is the default for docker YMMV
-RUN echo "host all  all    0.0.0.0/0  md5" >> /var/lib/pgsql/data/pg_hba.conf
+RUN echo "host all  all    0.0.0.0/0  trust" >> /var/lib/pgsql/data/pg_hba.conf
 
 # Listen on all interfaces
 RUN echo "listen_addresses='*'" >> /var/lib/pgsql/data/postgresql.conf
