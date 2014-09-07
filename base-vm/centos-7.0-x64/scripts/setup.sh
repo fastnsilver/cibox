@@ -28,6 +28,8 @@ tar -xJf systemd-216.tar.xz
 cd systemd-216
 ./configure
 make && make install
+systemctl daemon-reexec
+systemctl --version
 
 # Install docker
 cd $VAGRANT_HOME
@@ -36,7 +38,7 @@ DOCKER_OS=2.fc20
 DOCKER_ARCH=x86_64
 wget --retry-connrefused http://kojipkgs.fedoraproject.org/packages/docker-io/$DOCKER_VERSION/$DOCKER_OS/$DOCKER_ARCH/docker-io-$DOCKER_VERSION-$DOCKER_OS.$DOCKER_ARCH.rpm
 chown vagrant:vagrant $VAGRANT_HOME/docker-io-$DOCKER_VERSION-$DOCKER_OS.$DOCKER_ARCH.rpm
-yum -y localinstall --skip-broken docker-io-$DOCKER_VERSION-$DOCKER_OS.$DOCKER_ARCH.rpm
+rpm -i --nodeps docker-io-$DOCKER_VERSION-$DOCKER_OS.$DOCKER_ARCH.rpm
 systemctl enable docker.service
 echo -e 'DOCKER_OPTS="-H tcp://0.0.0.0:4243 -H unix:///var/run/docker.sock"\n' > /etc/sysconfig/docker
 systemctl start docker.service
