@@ -18,8 +18,8 @@
       "ssh_port": 22,
       "ssh_wait_timeout": "20m",
       "shutdown_command": "echo 'shutdown -P now' > shutdown.sh; echo 'vagrant'|sudo -S sh 'shutdown.sh'",
-      "guest_additions_url" : "https://github.com/fastnsilver/cibox/raw/master/base-vm/supplemental/VBoxGuestAdditions_4.3.13-94832.iso",
-      "guest_additions_sha256" : "f929afc02f75086913c415123c30e69b522c414c7d9dca8d51d5febd313926ef",
+      "guest_additions_url": "https://github.com/fastnsilver/cibox/raw/master/base-vm/supplemental/VBoxGuestAdditions_4.3.13-94832.iso",
+      "guest_additions_sha256": "f929afc02f75086913c415123c30e69b522c414c7d9dca8d51d5febd313926ef",
       "virtualbox_version_file": ".vbox_version",
       "vboxmanage": [
         [
