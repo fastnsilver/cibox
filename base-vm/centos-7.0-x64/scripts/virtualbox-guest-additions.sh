@@ -9,7 +9,7 @@
 VAGRANT_HOME=/home/vagrant
 mkdir /mnt/VBoxGuestAdditions
 mount -o loop $VAGRANT_HOME/VBoxGuestAdditions.iso /mnt/VBoxGuestAdditions
-y | sh /mnt/VBoxGuestAdditions/VBoxLinuxAdditions.run || true
+yes | sh /mnt/VBoxGuestAdditions/VBoxLinuxAdditions.run
 
 # Unmount
 umount /mnt/VBoxGuestAdditions
