@@ -21,17 +21,17 @@ rm -rf $VAGRANT_HOME/git-$GIT_VERSION*
 
 # Update systemd
 # @see http://linoxide.com/linux-how-to/install-systemd-centos-redhat/
-cd $VAGRANT_HOME
-wget --retry-connrefused http://www.freedesktop.org/software/systemd/systemd-216.tar.xz 
-chown vagrant:vagrant $VAGRANT_HOME/systemd-216.tar.xz
-tar -xJf systemd-216.tar.xz
-cd systemd-216
-./configure
-make && make install
-systemctl daemon-reexec
-systemctl --version
+# cd $VAGRANT_HOME
+# wget --retry-connrefused http://www.freedesktop.org/software/systemd/systemd-216.tar.xz 
+# chown vagrant:vagrant $VAGRANT_HOME/systemd-216.tar.xz
+# tar -xJf systemd-216.tar.xz
+# cd systemd-216
+# ./configure
+# make && make install
+# systemctl daemon-reexec
+# systemctl --version
 
-# Install docker
+# Install Docker
 cd $VAGRANT_HOME
 DOCKER_VERSION=1.2.0
 DOCKER_OS=4.el7.centos

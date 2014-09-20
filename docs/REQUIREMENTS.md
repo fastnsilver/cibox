@@ -3,23 +3,12 @@
 "CI in a Box" has a few requirements that must be met before you're able to use it. The following software should be installed and configured:
 
 * Git >= v1.9.4
-* Vagrant >= v1.6.3
-* VirtualBox >= v4.3.12
-* Packer >= v0.6.1
+* Vagrant >= v1.6.5
+* VirtualBox >= v4.3.16
+* Packer >= v0.7.1
 
 
 If you're in a hurry, skip to the relevant sub-section under Quickstarts below.
-
-
-## Concerns
-
-As of 2014-07-16, VirtualBox 4.3.14 is known to [fail](https://forums.virtualbox.org/viewtopic.php?f=6&t=62615) on Windows platforms. If you follow the Quickstart for Windows below, instead of using Chocolately `cinst virtualbox` , you will need to manually install VirtualBox using these steps:
-
-* Download and install [VirtualBox 4.3.12](http://download.virtualbox.org/virtualbox/4.3.12/VirtualBox-4.3.12-93733-Win.exe)
-* Download and install [VirtualBox Extensions](http://download.virtualbox.org/virtualbox/4.3.12/Oracle_VM_VirtualBox_Extension_Pack-4.3.12-93733.vbox-extpack)
-* Download patch for [VirtualBox Guest Additions](https://www.virtualbox.org/download/testcase/VBoxGuestAdditions_4.3.13-94832.iso)
-    * Rename this file to `VBoxGuestAdditions.iso`
-    * Replace the copy of `VBoxGuestAdditions.iso` in `C:\Program Files\Oracle\VirtualBox` with the one you downloaded
 
 
 ## Quickstarts
